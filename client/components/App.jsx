@@ -5,11 +5,13 @@ import Fridge from './Fridge.jsx';
 //import CreateItem from './CreateItem.jsx';
 
 function App() {
-  return (
-    <div className='fridge'>
-      <Fridge />
-    </div>
-  )
+    const fridgeState = true
+    return (
+      // <div className='fridge'>
+      <Fridge fridgeState={fridgeState}/>
+      // </div>
+    )
+
 }
 
 export default App;
