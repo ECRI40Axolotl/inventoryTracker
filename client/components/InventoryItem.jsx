@@ -1,13 +1,15 @@
 import React, { Component, useState, useEffect } from 'react';
 
-function InventoryItem() {
+function InventoryItem({item}) {
   const [inventoryInfo, setRender] = useState();
 
   const deleteItem = async (idNum) => {
     try {
       const deletedItem = await fetch('/fridge/deleteItem', {
         method: DELETE,
+        body: {id: idNum}
       });
+      console.log(deletedItem)
     } catch (err) {
       console.log('Fridge.useEffect: get items: ERROR:, ', err);
     }
@@ -16,24 +18,23 @@ function InventoryItem() {
   return (
     <section className='inventoryItem'>
       <div className='itemInfo'>
-        //confirm props brought into item
-        <h2>{this.props.info.item_name}</h2>
-        //need to put information here for inventory
+        //TODO: Confirm how state will be passed in
+        <h2>{item.item_name}</h2>
+        //TODO: need to put information here if it exists in inventory
         <ul className='inventoryTableInfo'>
           <li className='itemDetail'>
-            Expiration Date: {this.props.info.expire}
+            Expiration Date: {item.expiration}
           </li>
           <li className='itemDetail'>
-            Bought On: {this.props.info.date_bought}
+            Bought On: {item.date_bought}
           </li>
-          <li className='itemDetail'>Status: {this.props.info.status}</li>
+          <li className='itemDetail'>Status: {item.status}</li>
         </ul>
-        //if there's no information
+        //TODO: print this if there's no information
         <h3>You are currently out of this item</h3>
       </div>
       <div className='itemButtons'>
-        //Update button will need to trigger a modal or something that will
-        allow you to edit fields before submitting changes
+        //TODO: Update button will need to trigger a modal or something that will allow you to edit fields before submitting changes
         <button className='updateInventory'>Update this Item</button>
         <button
           className='deleteInventory'
