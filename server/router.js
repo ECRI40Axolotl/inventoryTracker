@@ -6,6 +6,6 @@ const router = express.Router();
 
 //declare routes below
 
-//router.get(_____)
+router.get('/', (req, res) => res.status(200).json('you hit the get request'))
 
 module.exports = router;

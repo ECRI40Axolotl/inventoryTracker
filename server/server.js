@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const fridgeRouter = require('router.js');
+const fridgeRouter = require('./router.js');
 
 const PORT = 3000;
 
