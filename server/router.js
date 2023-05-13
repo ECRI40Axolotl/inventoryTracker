@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 //declare routes below
-
-router.get('/', (req, res) => res.status(200).json('you hit the get request'))
+// 'you hit the get request'
+router.get('/', (req, res) => res.status(200).json('[{number: 1}, {number: 2}]'))
 
 module.exports = router;
