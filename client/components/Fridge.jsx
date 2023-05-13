@@ -22,8 +22,9 @@ function Fridge() {
   useEffect(async () => {
     try {
       console.log('before ', inventory);
-      const data = await fetch('/fridge');
-      setInventory(data.json());
+      const response = await fetch('/fridge');
+      const data = await response.json();
+      await setInventory(data);
       console.log('after ', inventory);
     } catch (err) {
       console.log('Fridge.useEffect: get items: ERROR:, ', err);
@@ -53,15 +54,6 @@ function Fridge() {
         ))}
       </div> */}
     </>
-
-
-
-  //  <>
-  //   <div>
-  //     <h1>{inventory}</h1>
-  //   </div>
-
-  //  </>
   )
 }
 
