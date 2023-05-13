@@ -11,4 +11,6 @@ router.get('/', fridgeController.getItems, (req, res) =>
   res.status(200).json(res.locals.inventory)
 );
 
+router.post('/', fridgeController.addItem, (req, res) => res.status(200));
+
 module.exports = router;
