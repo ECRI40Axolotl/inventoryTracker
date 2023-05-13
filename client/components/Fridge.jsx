@@ -35,7 +35,10 @@ function Fridge(fridgeState) {
 
     
   return (
-    <div>{inventoryElements}</div>
+    <div>
+      <button type="button">Add Item</button>
+      {inventoryElements}
+    </div>
   )
 }
 
