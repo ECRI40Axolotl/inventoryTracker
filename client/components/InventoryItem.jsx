@@ -1,40 +1,44 @@
 import React, { Component, useState, useEffect } from 'react';
 
-function InventoryItem({item}) {
-  const [inventoryInfo, setRender] = useState();
+function InventoryItem({ item }) {
+  const [inStock, setStock] = useState(false);
 
   const deleteItem = async (idNum) => {
     try {
       const deletedItem = await fetch('/fridge/deleteItem', {
         method: DELETE,
-        body: {id: idNum}
+        body: { id: idNum },
       });
-      console.log(deletedItem)
+      console.log(deletedItem);
     } catch (err) {
       console.log('Fridge.useEffect: get items: ERROR:, ', err);
     }
   };
 
+  useEffect(() => {
+    if (item._id) {
+      setStock(true);
+    }
+  });
+
   return (
     <section className='inventoryItem'>
       <div className='itemInfo'>
-        //TODO: Confirm how state will be passed in
         <h2>{item.item_name}</h2>
-        //TODO: need to put information here if it exists in inventory
-        <ul className='inventoryTableInfo'>
-          <li className='itemDetail'>
-            Expiration Date: {item.expiration}
-          </li>
-          <li className='itemDetail'>
-            Bought On: {item.date_bought}
-          </li>
-          <li className='itemDetail'>Status: {item.status}</li>
-        </ul>
-        //TODO: print this if there's no information
-        <h3>You are currently out of this item</h3>
+        {/* Will show information if it exists in inventory */}
+        {inStock && (
+          <ul className='inventoryTableInfo'>
+            <li className='itemDetail'>Expiration Date: {item.expiration}</li>
+            <li className='itemDetail'>Bought On: {item.date_bought}</li>
+            <li className='itemDetail'>Status: {item.status}</li>
+          </ul>
+        )}
+        {/* Will print this if there's no information besides item_name */}
+        {!inStock && <h3>You are currently out of this item</h3>}
       </div>
       <div className='itemButtons'>
-        //TODO: Update button will need to trigger a modal or something that will allow you to edit fields before submitting changes
+        {/* //TODO: Update button will need to trigger a modal or something that
+        will allow you to edit fields before submitting changes */}
         <button className='updateInventory'>Update this Item</button>
         <button
           className='deleteInventory'
@@ -42,8 +46,12 @@ function InventoryItem({item}) {
             deleteItem(this.props.info._id);
             return window.location.reload(false);
           }}
-        ></button>
+        >
+          Delete Item
+        </button>
       </div>
     </section>
   );
 }
+
+export default InventoryItem;
