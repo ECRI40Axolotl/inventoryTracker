@@ -13,6 +13,10 @@ router.get('/', fridgeController.getItems, (req, res) =>
 
 router.post('/', fridgeController.addItem, (req, res) => res.sendStatus(201));
 
+router.patch('/', fridgeController.updateItem, (req, res) =>
+  res.sendStatus(200)
+);
+
 router.delete('/deleteItem', fridgeController.deleteItem, (req, res) =>
   res.sendStatus(204)
 );

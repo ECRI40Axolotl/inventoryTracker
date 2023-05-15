@@ -16,6 +16,8 @@ date_bought - DATE - REQUIRED
 status - VARCHAR - REQUIRED
 */
 
+// ** We should probably add logic to check for errors in all of our middleware
+
 // get all items
 fridgeController.getItems = async (req, res, next) => {
   // string is the query
@@ -88,6 +90,27 @@ fridgeController.addItem = async (req, res, next) => {
 };
 
 // update items
+
+fridgeController.updateItem = async (req, res, next) => {
+  // string is the query
+  console.log('request body: ', req.body);
+  console.log("you're in the UPDATE items method!");
+  const { id, expiration, date_bought, status } = req.body;
+  const updateQuery =
+    'UPDATE inventory_table SET expiration = $2, date_bought = $3, status = $4 WHERE _id = $1';
+  const values = [id, expiration, date_bought, status];
+  try {
+    await db.query(updateQuery, values);
+    return next();
+  } catch (err) {
+    console.log(err);
+    return next({
+      log: 'Error in updateItem controller method',
+      status: 400,
+      message: 'Error while updating item',
+    });
+  }
+};
 
 // delete single item
 
