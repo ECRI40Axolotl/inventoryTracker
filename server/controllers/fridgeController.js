@@ -43,25 +43,26 @@ fridgeController.getItems = async (req, res, next) => {
 fridgeController.verifyItem = async (req, res, next) => {
   console.log("you're in the verifyItem method!")
   const { item_name } = req.body;
+  req.body.item_name = item_name
   const itemExists =
     'SELECT COUNT(1) FROM item_table WHERE item_name = $1 AND item_name IS NOT NULL';
   // adding passed in item name to item table
-  const addItemToItemTable = 'INSERT INTO item_table(item_name) VALUES ($1)';
+  const addItemToItemTable = 'INSERT INTO item_table(item_name) VALUES ($1) AND item_name IS NOT NULL';
   const itemName = [item_name];
   try {
-    const itemObj = await db.query(itemExists, itemName);
+   const itemObject = await db.query(itemExists, itemName)
+      const itemStatus = itemObject.rows[0].count;
+      console.log('ITEM STATUS: ', itemStatus);
+      if (itemStatus === 0) {
+        // add it to the item table
+        const newItem = await db.query(addItemToItemTable, itemName);
+        console.log('newItem :', newItem)
+      } 
+      return next();
     // console.log("itemObj: ", itemObj);
-    const itemStatus = itemObj.rows[0].count;
-    console.log('ITEM STATUS: ', itemStatus);
-    if (itemStatus !== 1) {
-      // add it to the item table
-      await db.query(addItemToItemTable, itemName);
-      console.log('ITEM EXISTS: NEW ITEM ADDED TO INVENTORY TABLE');
-      return next();
-    } 
-    else {
-      return next();
-    }
+    // else {
+    //   return next();
+    // }
   } catch(err){
     console.log(err)
     return next({
@@ -144,7 +145,7 @@ fridgeController.deleteItem = async (req, res, next) => {
   const { id } = req.body;
   const deleteQuery = 'DELETE FROM inventory_table WHERE _id = $1;';
   try {
-    const inventory = await db.query(deleteQuery, [id]);
+    const deleteItem = await db.query(deleteQuery, [id]);
     return next();
   } catch (err) {
     console.log(err);
