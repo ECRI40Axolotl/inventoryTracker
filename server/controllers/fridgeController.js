@@ -22,7 +22,6 @@ const fixDateFormat = (dateString) => {
   return dateObj.toLocaleDateString()
 }
 
-
 // get all items
 fridgeController.getItems = async (req, res, next) => {
   // string is the query
