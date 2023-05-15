@@ -17,8 +17,7 @@ const CreateItem = (props) => {
   const [status, statusOnChange] = useInput('');
 
   const AddItem = () => {
-    
-    name = name.toLowerCase()
+    name = name.toLowerCase();
 
     const body = {
       name,
@@ -27,7 +26,7 @@ const CreateItem = (props) => {
       status,
     };
 
-    if (name === '' ) throw Error ('Item name is required');
+    if (name === '') throw Error('Item name is required');
     if (body.status === '') body.status = 'Full';
 
     fetch('/fridge/create', {
@@ -44,52 +43,57 @@ const CreateItem = (props) => {
   };
 
   return (
-    <section className='mainSection'>
-      <header className='pageHeader'>
+    <section className="mainSection">
+      <header className="pageHeader">
         <h2>Add an Inventory Item</h2>
         <Link to={'/'}>
-          <button type='button' className='btnSecondary'>
+          <button type="button" className="btnSecondary">
             Go Back
           </button>
         </Link>
       </header>
-      <article className='card createItem'>
+      <article className="card createItem">
         <h3>Enter your Item information</h3>
-        <div className='inventoryFields'>
-          <label htmlFor='name'>Name: </label>
-          <input name='name' value={name} onChange={nameOnChange} placeholder = {'Peanut Butter'}/>
-        </div>
-        <div className='inventoryFields'>
-          <label htmlFor='expiration_date'>Expiration Date : </label>
-          <input 
-            name='expiration_date' 
-            value={expiration_date} 
-            onChange={expiration_dateOnChange} 
-            placeholder={"YYYY-MM-DD"}
+        <div className="inventoryFields">
+          <label htmlFor="name">Name: </label>
+          <input
+            name="name"
+            value={name}
+            onChange={nameOnChange}
+            placeholder={'Peanut Butter'}
           />
         </div>
-        <div className='inventoryFields'>
-          <label htmlFor='bought_on'>Bought On: </label> 
+        <div className="inventoryFields">
+          <label htmlFor="expiration_date">Expiration Date : </label>
           <input
-            name='bought_on'
+            name="expiration_date"
+            value={expiration_date}
+            onChange={expiration_dateOnChange}
+            placeholder={'YYYY-MM-DD'}
+          />
+        </div>
+        <div className="inventoryFields">
+          <label htmlFor="bought_on">Bought On: </label>
+          <input
+            name="bought_on"
             value={bought_on}
             onChange={bought_onOnChange}
-            placeholder = {'YYYY-MM-DD'}
+            placeholder={'YYYY-MM-DD'}
           />
         </div>
-        <div className='inventoryFields'>
-          <label htmlFor='status'>Status : </label>
+        <div className="inventoryFields">
+          <label htmlFor="status">Status : </label>
           <input
-            name='status'
+            name="status"
             value={status}
             onChange={statusOnChange}
             placeholder={'Full'}
           />
         </div>
-        <div className='createButtonContainer'>
+        <div className="createButtonContainer">
           <button
-            type='button'
-            className='btnMain'
+            type="button"
+            className="btnMain"
             onClick={() => {
               AddItem();
               return window.location.replace('http://localhost:8080');

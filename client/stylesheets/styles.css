@@ -25,10 +25,23 @@ header {
   margin-bottom: 2em;
 }
 
+#sean {
+  position: absolute;
+  transform: scale(0.4, 0.4);
+  transform: rotate(17);
+  bottom: 0px;
+  right: 0px;
+}
+
+img {
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
 #logo {
   margin: 0;
   font-family: 'soap', sans-serif;
-  font-size: 4.2rem;
+  font-size: 4.7rem;
 
   text-shadow: 2px 2px 0px #46b59b, 4px 4px 0px #46b59b, 6px 6px 0px #017e7f,
     8px 8px 0px #084b68, 10px 10px 0px #026767, 12px 12px 0px #026767;
@@ -60,18 +73,18 @@ em {
 
 #outerFridgeBox {
   position: absolute;
-  left: 17%;
-  width: 60%;
+  margin: auto;
+  width: 85%;
   display: flex;
 }
 
 #innerFridgeBox {
   background: #fff7ed;
   position: absolute;
-  max-width: 100%;
+  max-width: 85%;
   border-radius: 1rem;
-  padding: 2rem 3rem;
-  min-width: 100%;
+  padding: 5.8rem 10rem 5rem 5rem;
+  min-width: 70%;
   box-shadow: 0.5rem 0.55rem 0.1rem #026767;
   display: flex;
   /* flex-direction: column; */
@@ -105,8 +118,8 @@ button {
   max-width: 8rem;
   /* margin-left: 2%; */
   position: absolute;
-  right: 2rem;
-  top: 2rem;
+  right: 4rem;
+  top: 2.5rem;
 }
 
 .fridgeButton:hover {
@@ -118,10 +131,10 @@ button {
   position: absolute;
   border-right: 2px solid #606e75;
   border-bottom: 2px solid #606e75;
-  top: 10rem;
-  right: 3rem;
+  top: 15rem;
+  right: 5rem;
   background-color: gray;
-  height: 380px;
+  height: 400px;
   width: 40px;
   border-radius: 10px;
   box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
@@ -130,17 +143,19 @@ button {
 #inventoryList {
   display: flex;
   flex-direction: row;
+  margin-top: 0.6rem;
+  margin-right: 0.7rem;
 }
 
 .inventoryItem {
   box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
-  color: #084b68;
+  color: #026767;
   background: #46b59b;
   padding: 2rem 1rem;
   margin: 1rem;
   border-radius: 0.8rem;
   min-width: 12rem;
-  max-height: 12rem;
+  max-height: 11rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -158,8 +173,8 @@ button {
   align-items: center;
   justify-content: center;
   min-width: 15rem;
-  max-height: 15rem;
-  min-height: 8rem;
+  max-height: 30rem;
+  min-height: 10rem;
 }
 
 .itemInfo h2 {
@@ -187,9 +202,9 @@ button {
 }
 
 .updateInventory {
-  border: 0.15rem solid #084b68;
-  background: #084b68;
-  box-shadow: 0.2rem 0.25rem 0.1rem #31806e;
+  border: 0.15rem solid #efa032;
+  background: #efa032;
+  box-shadow: 0.1rem 0.2rem 0.1rem #c08635;
   font-weight: 700;
   margin: 0.5rem;
   max-width: 5rem;
@@ -197,21 +212,21 @@ button {
 
 .updateInventory:hover {
   background: #fff7ed;
-  color: #084b68;
+  color: #efa032;
 }
 
 .deleteInventory {
-  border: 0.15rem solid #084b68;
-  background: #084b68;
-  box-shadow: 0.2rem 0.25rem 0.1rem #31806e;
+  border: 0.15rem solid #017e7f;
+  background: #017e7f;
+  box-shadow: 0.1rem 0.2rem 0.1rem #017e7f;
   font-weight: 700;
-  margin: 0.6rem;
+  margin: 0.5rem;
   max-width: 5rem;
 }
 
 .deleteInventory:hover {
   background: #fff7ed;
-  color: #084b68;
+  color: #46b59b;
 }
 
 .outOfStock {
@@ -220,7 +235,69 @@ button {
   color: #fff7ed;
   text-align: center;
   padding: 0.6em;
-  margin: 0.2rem;
+  margin: 0.8rem;
   box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
   max-width: 8rem;
+}
+
+/* **** These styles for for /create (to add item) **** */
+
+.mainSection {
+  position: absolute;
+  top: 4rem;
+  left: 35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #084b68;
+  background-color: #fff7ed;
+  border-radius: 10px;
+  padding: 0.4rem;
+  box-shadow: 0.3rem 0.3rem 0.1rem #026767;
+}
+
+.pageHeader {
+  color: #084b68;
+  margin-bottom: 0;
+}
+
+.btnSecondary {
+  border: 0.15rem solid #efa032;
+  background: #efa032;
+  box-shadow: 0.1rem 0.2rem 0.1rem #c08635;
+  font-weight: 700;
+  /* margin: 0.5rem; */
+  max-width: 5rem;
+}
+
+.btnSecondary:hover {
+  border: 0.15rem solid #efa032;
+  background: #fff7ed;
+}
+
+.card {
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inventoryFields {
+  padding: 4px;
+  font-size: 1rem;
+}
+
+.btnMain {
+  border: 0.15rem solid #46b59b;
+  background: #46b59b;
+  box-shadow: 0.1rem 0.2rem 0.1rem #46b59b;
+  font-weight: 700;
+  margin: 0.5rem;
+  max-width: 5rem;
+}
+
+.inventoryFields {
+  max-height: 40rem;
 }
