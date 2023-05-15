@@ -33,6 +33,7 @@ fridgeController.getItems = async (req, res, next) => {
     await inventory.rows.forEach(element => {
       element.date_bought = fixDateFormat(element.date_bought);
       element.expiration = fixDateFormat(element.expiration);
+      element.item_name = element.item_name.toUpperCase()
     })
     res.locals.inventory = await inventory.rows;
     return next();
