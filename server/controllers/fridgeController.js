@@ -28,7 +28,11 @@ fridgeController.getItems = async (req, res, next) => {
     return next();
   } catch (err) {
     console.log(err);
-    return next(err);
+    return next({
+      log: 'Error in getItem controller method',
+      status: 400,
+      message: 'Error while loading items',
+    });
   }
 };
 
@@ -51,21 +55,6 @@ fridgeController.addItem = async (req, res, next) => {
   const itemName = [item_name];
   const values = [item_name, expiration, date_bought, status];
   console.log('values array: ', values);
-  // check if item we're adding exists in item_table
-  // if not, add it to item_table (that will give it a unique id)
-  //  add to inventory_table
-  // try {
-  //   // if passed in name doesn't exist
-  //   if ((await db.query(itemExists, [values[0]])) !== 1) {
-  //     // add it to the item table
-  //     await db.query(addItemToItemTable, [values[0]]);
-  //     console.log('NEW ITEM ADDED TO ITEM TABLE');
-  //   }
-  //   // add the instance of item into the inventory table
-  //   await db.query(addItemToInventory, values);
-  //   console.log('NEW ITEM ADDED TO INVENTORY TABLE');
-  //   return next();
-
   try {
     // if passed in item exists
     // console.log('item name: ', itemName);
@@ -90,7 +79,11 @@ fridgeController.addItem = async (req, res, next) => {
     return next();
   } catch (err) {
     console.log(err);
-    return next(err);
+    return next({
+      log: 'Error in addItem controller method',
+      status: 400,
+      message: 'Error while adding item',
+    });
   }
 };
 
@@ -100,16 +93,20 @@ fridgeController.addItem = async (req, res, next) => {
 
 fridgeController.deleteItem = async (req, res, next) => {
   // string is the query
-  const itemQuery =
-    'SELECT * FROM item_table FULL OUTER JOIN inventory_table ON item_table._id = inventory_table.item_id';
-  console.log("you're in the get items method!");
+  console.log('request body: ', req.body);
+  console.log("you're in the DELETE items method!");
+  const { id } = req.body;
+  const deleteQuery = 'DELETE FROM inventory_table WHERE _id = $1;';
   try {
-    const inventory = await db.query(itemQuery);
-    res.locals.inventory = await inventory.rows;
+    const inventory = await db.query(deleteQuery, [id]);
     return next();
   } catch (err) {
     console.log(err);
-    return next(err);
+    return next({
+      log: 'Error in deleteItem controller method',
+      status: 400,
+      message: 'Error while deleting item',
+    });
   }
 };
 
