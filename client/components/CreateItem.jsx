@@ -17,6 +17,9 @@ const CreateItem = (props) => {
   const [status, statusOnChange] = useInput('');
 
   const AddItem = () => {
+    
+    name = name.toLowerCase()
+
     const body = {
       name,
       expiration_date,
