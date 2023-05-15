@@ -64,6 +64,9 @@ fridgeController.addItem = async (req, res, next) => {
     // if we remove the "await", it works for items that already exist
     // if we keep it, it works for items that don't exist
     const itemStatus = await db.query(itemExists, itemName);
+    // change to itemObject above
+    //declare variable itemStatus that awaits result of itemobject.rowcount
+    //then plug it into places we need below
     console.log('ITEM STATUS: ', itemStatus.rowCount);
     if (itemStatus.rowCount === 1) {
       console.log('ITEM EXISTS, IN IF STATEMENT');
