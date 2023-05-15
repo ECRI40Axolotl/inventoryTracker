@@ -38,49 +38,50 @@ fridgeController.getItems = async (req, res, next) => {
   }
 };
 
+// checks if item is in our item table or not, and adds it if not
+
+fridgeController.verifyItem = async (req, res, next) => {
+  console.log("you're in the verifyItem method!")
+  const { item_name } = req.body;
+  req.body.item_name = item_name
+  const itemExists =
+    'SELECT COUNT(1) FROM item_table WHERE item_name = $1';
+  // adding passed in item name to item table
+  const addItemToItemTable = 'INSERT INTO item_table(item_name) VALUES ($1)';
+  const itemName = [item_name];
+  try {
+   const itemObject = await db.query(itemExists, itemName)
+      console.log('itemObject: ', itemObject);
+      const itemStatus = itemObject.rows[0].count;
+      console.log('ITEM STATUS TYPE: ', typeof itemStatus);
+      if (itemStatus === '0') {
+        // add it to the item table
+        const newItem = await db.query(addItemToItemTable, itemName);
+        console.log('newItem :', newItem);
+      } 
+      return next();
+  } catch(err){
+    console.log(err)
+    return next({
+      log: 'Error in verifyItem controller method',
+      status: 400,
+      message: 'Error while verifying item',
+    })
+  }
+}
+
 // add items
 
 fridgeController.addItem = async (req, res, next) => {
   console.log("you're in the add item method!");
   const { item_name, expiration, date_bought, status } = req.body;
-  // string is the query
-  const itemExists =
-    // 'SELECT $1 FROM item_table WHERE EXISTS (SELECT $1 FROM item_table)';
-    'SELECT COUNT(1) FROM item_table WHERE item_name = $1 AND item_name IS NOT NULL';
-  // adding passed in item name to item table
-  const addItemToItemTable = 'INSERT INTO item_table(item_name) VALUES ($1)';
-  // TODO: how do we get item_id?????
   const addItemToInventory =
-    // 'INSERT INTO inventory_table (item_id, expiration, date_bought, status) VALUES ((SELECT _id AS item_id FROM item_table WHERE item_table.item_name = $1), $2, $3, $4)';
-    'INSERT INTO inventory_table (item_id, expiration, date_bought, status) VALUES ((SELECT _id FROM item_table WHERE item_name = $1 AND _id IS NOT NULL), $2, $3, $4)';
-  // 'INSERT INTO inventory_table (item_id, expiration, date_bought, status) VALUES (1, $2, $3, $4)';
-  const itemName = [item_name];
-  const values = [item_name, expiration, date_bought, status];
+    'INSERT INTO inventory_table (item_id, expiration, date_bought, status) VALUES ((SELECT _id FROM item_table WHERE item_name = $1), $2, $3, $4)';
+    const values = [item_name, expiration, date_bought, status];
   console.log('values array: ', values);
   try {
-    // if passed in item exists
-    // console.log('item name: ', itemName);
-    // TODO *******************************************************************************
-    // if we remove the "await", it works for items that already exist
-    // if we keep it, it works for items that don't exist
-    const itemStatus = await db.query(itemExists, itemName);
-    // change to itemObject above
-    //declare variable itemStatus that awaits result of itemobject.rowcount
-    //then plug it into places we need below
-    console.log('ITEM STATUS: ', itemStatus.rowCount);
-    if (itemStatus.rowCount === 1) {
-      console.log('ITEM EXISTS, IN IF STATEMENT');
-      // add it to the item table
-      await db.query(addItemToInventory, values);
-      console.log('ITEM EXISTS: NEW ITEM ADDED TO INVENTORY TABLE');
-    } else {
-      console.log('IN ELSE STATEMENT');
-      await db.query(addItemToItemTable, itemName);
-      console.log('ITEM DID NOT EXIST: NEW ITEM ADDED TO ITEM TABLE');
-      await db.query(addItemToInventory, values);
-      console.log('ITEM DID NOT EXIST: NEW ITEM ADDED TO INVENTORY TABLE');
-    }
-    // add the instance of item into the inventory table
+    const itemInv = await db.query(addItemToInventory, values);
+    console.log("db query result for adding item into inventory: ", itemInv)
     return next();
   } catch (err) {
     console.log(err);
@@ -124,7 +125,7 @@ fridgeController.deleteItem = async (req, res, next) => {
   const { id } = req.body;
   const deleteQuery = 'DELETE FROM inventory_table WHERE _id = $1;';
   try {
-    const inventory = await db.query(deleteQuery, [id]);
+    const deleteItem = await db.query(deleteQuery, [id]);
     return next();
   } catch (err) {
     console.log(err);
