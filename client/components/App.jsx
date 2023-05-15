@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 //import './stylesheets/styles.css';
 import Fridge from './Fridge.jsx';
 import CreateItem from './CreateItem.jsx';
+import SignIn from './signIn.jsx';
 
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
       <div>
         <BrowserRouter>
         <Routes>
-          <Route className='fridge' exact path= '/' element  = {<Fridge fridgeState={fridgeState}/>}>
+          <Route exact path='/' element = {<SignIn/>}></Route>
+          <Route className='fridge' exact path= '/index' element  = {<Fridge fridgeState={fridgeState}/>}>
           </Route>
           <Route exact path='/create' element={<CreateItem />}>
           </Route>

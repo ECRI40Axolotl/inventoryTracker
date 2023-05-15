@@ -11,6 +11,7 @@ const PORT = 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 //request to router
 app.use('/fridge', fridgeRouter);
 app.use('/user', userRouter);

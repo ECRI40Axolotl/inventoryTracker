@@ -21,11 +21,7 @@ userController.checkUser = async (req, res, next) => {
     const foundUser = await db.query(sqlQuery, [username]);
     console.log('foundUser: ', foundUser.rows);
     if (foundUser.rows[0]) {
-      return next({
-        log: 'Error checking user',
-        status: 409,
-        message: {err: 'Username already taken'}
-      })
+      res.redirect('/login')
     } else {
       return next();
     }
@@ -56,6 +52,32 @@ userController.createUser = async (req, res, next) => {
           message: 'Error while creating user',
         });
       }
+}
+
+userController.checkLogin = async (req, res, next) => {
+  // query to get the req.body.username
+  // query to get the user password
+  try {
+    console.log('In checkLogin');
+    const { username, password } = req.body;
+    const loginQuery = 'SELECT username, password FROM users WHERE username=$1';
+    const dbPW = await db.query(loginQuery, [username]);
+    console.log('dbPW: ', dbPW.rows);
+    if (!dbPW.rows[0].username && await bcrypt.compare(password, dbPW.rows[0].password)) {
+      res.locals.isLoggedIn = true;
+      return next();
+    } else {
+      // redirect to login page
+      res.locals.isLoggedIn = false;
+    };
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Error in userController.checkLogin method',
+      status: 400,
+      message: 'Username or Password is incorrect',
+    });
+  }
 }
 
 module.exports = userController;
