@@ -35,9 +35,13 @@ function Fridge(fridgeState) {
   }
 
   return (
-    <div>
-      <Link to = {'/create'} >
-        <button type="button">Add Item</button>
+    <div id="innerFridgeBox">
+      {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
+      <div id="fridgeHandle"></div>
+      <Link to={'/create'}>
+        <button className="fridgeButton" type="button">
+          Add Item
+        </button>
       </Link>
       {inventoryElements}
     </div>

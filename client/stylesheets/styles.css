@@ -1,0 +1,226 @@
+/* MAIN COLORS: 
+Navy: #052939
+Dark teal:#017e7f
+Light teal:#46b59b
+Yellow:  #efa032
+Red: #eb452b
+Cream: #fcedd8
+Off-white: #f5f0ea
+*/
+
+body {
+  background: #017e7f;
+  font-family: 'century-gothic', sans-serif;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  color: #fff7ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+#logo {
+  margin: 0;
+  font-family: 'soap', sans-serif;
+  font-size: 4.2rem;
+
+  text-shadow: 2px 2px 0px #46b59b, 4px 4px 0px #46b59b, 6px 6px 0px #017e7f,
+    8px 8px 0px #084b68, 10px 10px 0px #026767, 12px 12px 0px #026767;
+
+  /* text-shadow: 2px 2px 0px #017e7f, 4px 4px 0px #46b59b, 6px 6px 0px #46b59b,
+    8px 8px 0px #026767, 10px 10px 0px #026767, 12px 12px 0px #026767; */
+  letter-spacing: 0.2rem;
+}
+
+#tagline {
+  margin: 0.2rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+  text-shadow: 0.05rem 0.05rem 0px #026767, 0.1rem 0.1rem 0px #026767;
+}
+
+em {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#outerFridgeBox {
+  position: absolute;
+  left: 17%;
+  width: 60%;
+  display: flex;
+}
+
+#innerFridgeBox {
+  background: #fff7ed;
+  position: absolute;
+  max-width: 100%;
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+  min-width: 100%;
+  box-shadow: 0.5rem 0.55rem 0.1rem #026767;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* would need to consider how to clean up styling for buttons */
+button {
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.5rem;
+  color: #fff7ed;
+  transition: 0.3s;
+  font-family: 'century-gothic', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.08rem;
+}
+
+.fridgeButton {
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.8rem;
+  color: #fff7ed;
+  transition: 0.3s;
+  font-family: 'century-gothic', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.08rem;
+  border: 0.15rem solid #efa032;
+  background: #efa032;
+  font-weight: 700;
+  box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
+  max-width: 8rem;
+  /* margin-left: 2%; */
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+}
+
+.fridgeButton:hover {
+  background: #fff7ed;
+  color: #efa032;
+}
+
+#fridgeHandle {
+  position: absolute;
+  border-right: 2px solid #606e75;
+  border-bottom: 2px solid #606e75;
+  top: 10rem;
+  right: 3rem;
+  background-color: gray;
+  height: 380px;
+  width: 40px;
+  border-radius: 10px;
+  box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
+}
+
+#inventoryList {
+  display: flex;
+  flex-direction: row;
+}
+
+.inventoryItem {
+  box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
+  color: #084b68;
+  background: #46b59b;
+  padding: 2rem 1rem;
+  margin: 1rem;
+  border-radius: 0.8rem;
+  min-width: 12rem;
+  max-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.itemInfo {
+  background: #fff7ed;
+  border-radius: 0.8rem;
+  padding: 0.5rem;
+  margin: 0.3rem;
+  box-shadow: 0.2rem 0.25rem 0.1rem #31806e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 15rem;
+  max-height: 15rem;
+  min-height: 8rem;
+}
+
+.itemInfo h2 {
+  margin: 0.3rem;
+  font-size: 1.8rem;
+}
+
+.inventoryTableInfo {
+  padding: 0;
+  margin: 0.2rem;
+  font-size: 0.9rem;
+}
+
+.inventoryTableInfo li {
+  list-style: none;
+}
+
+.detailTitle {
+  font-weight: 700;
+}
+
+.itemButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.updateInventory {
+  border: 0.15rem solid #084b68;
+  background: #084b68;
+  box-shadow: 0.2rem 0.25rem 0.1rem #31806e;
+  font-weight: 700;
+  margin: 0.5rem;
+  max-width: 5rem;
+}
+
+.updateInventory:hover {
+  background: #fff7ed;
+  color: #084b68;
+}
+
+.deleteInventory {
+  border: 0.15rem solid #084b68;
+  background: #084b68;
+  box-shadow: 0.2rem 0.25rem 0.1rem #31806e;
+  font-weight: 700;
+  margin: 0.6rem;
+  max-width: 5rem;
+}
+
+.deleteInventory:hover {
+  background: #fff7ed;
+  color: #084b68;
+}
+
+.outOfStock {
+  background: #eb452b;
+  border-radius: 0.3rem;
+  color: #fff7ed;
+  text-align: center;
+  padding: 0.6em;
+  margin: 0.2rem;
+  box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
+  max-width: 8rem;
+}
