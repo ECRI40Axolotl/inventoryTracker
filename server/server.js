@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 
 const fridgeRouter = require('./fridgeRouter.js');
+const userRouter = require('./userRouter.js');
 
 const PORT = 3000;
 
@@ -12,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //request to router
 app.use('/fridge', fridgeRouter);
+app.use('/user', userRouter);
 
 //catch-all route handler for any requests
 
