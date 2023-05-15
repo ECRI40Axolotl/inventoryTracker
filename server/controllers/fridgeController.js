@@ -45,24 +45,21 @@ fridgeController.verifyItem = async (req, res, next) => {
   const { item_name } = req.body;
   req.body.item_name = item_name
   const itemExists =
-    'SELECT COUNT(1) FROM item_table WHERE item_name = $1 AND item_name IS NOT NULL';
+    'SELECT COUNT(1) FROM item_table WHERE item_name = $1';
   // adding passed in item name to item table
-  const addItemToItemTable = 'INSERT INTO item_table(item_name) VALUES ($1) AND item_name IS NOT NULL';
+  const addItemToItemTable = 'INSERT INTO item_table(item_name) VALUES ($1)';
   const itemName = [item_name];
   try {
    const itemObject = await db.query(itemExists, itemName)
+      console.log('itemObject: ', itemObject);
       const itemStatus = itemObject.rows[0].count;
-      console.log('ITEM STATUS: ', itemStatus);
-      if (itemStatus === 0) {
+      console.log('ITEM STATUS TYPE: ', typeof itemStatus);
+      if (itemStatus === '0') {
         // add it to the item table
         const newItem = await db.query(addItemToItemTable, itemName);
-        console.log('newItem :', newItem)
+        console.log('newItem :', newItem);
       } 
       return next();
-    // console.log("itemObj: ", itemObj);
-    // else {
-    //   return next();
-    // }
   } catch(err){
     console.log(err)
     return next({
@@ -79,29 +76,12 @@ fridgeController.addItem = async (req, res, next) => {
   console.log("you're in the add item method!");
   const { item_name, expiration, date_bought, status } = req.body;
   const addItemToInventory =
-    'INSERT INTO inventory_table (item_id, expiration, date_bought, status) VALUES ((SELECT _id FROM item_table WHERE item_name = $1 AND _id IS NOT NULL), $2, $3, $4)';
+    'INSERT INTO inventory_table (item_id, expiration, date_bought, status) VALUES ((SELECT _id FROM item_table WHERE item_name = $1), $2, $3, $4)';
     const values = [item_name, expiration, date_bought, status];
   console.log('values array: ', values);
   try {
-    // // if passed in item exists
-    // // console.log('item name: ', itemName);
-    // // **this is different now because we changed to itemObj instead of just itemStatus: if we remove the "await", it works for items that already exist
-    // // if we keep it, it works for items that don't exist
-    // const itemObj = await db.query(itemExists, itemName);
-    // console.log("itemObj: ", itemObj);
-    // // change to itemObject above
-    // //declare variable itemStatus that awaits result of itemobject.rowcount
-    // const itemStatus = itemObj.rows[0].count;
-    // //then plug it into places we need below
-    // console.log('ITEM STATUS: ', itemStatus);
-    // if (itemStatus !== 1) {
-    //   console.log('ITEM EXISTS, IN IF STATEMENT');
-    //   // add it to the item table
-    //   await db.query(addItemToItemTable, itemName);
-    //   console.log('ITEM EXISTS: NEW ITEM ADDED TO INVENTORY TABLE');
-    // } 
-    // // add item to inventory
-    await db.query(addItemToInventory, values);
+    const itemInv = await db.query(addItemToInventory, values);
+    console.log("db query result for adding item into inventory: ", itemInv)
     return next();
   } catch (err) {
     console.log(err);
