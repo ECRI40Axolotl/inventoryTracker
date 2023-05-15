@@ -1,4 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import InventoryItem from './InventoryItem.jsx';
 
 function Fridge(fridgeState) {
@@ -35,7 +36,9 @@ function Fridge(fridgeState) {
 
   return (
     <div>
-      <button type="button">Add Item</button>
+      <Link to = {'/create'} >
+        <button type="button">Add Item</button>
+      </Link>
       {inventoryElements}
     </div>
   );

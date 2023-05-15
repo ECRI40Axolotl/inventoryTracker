@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -10,53 +9,34 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
-const CreateItem = (props) => {
-  const [name, nameOnChange] = useInput('');
+function UpdateModal ({itemInfo, closeModal}) {
   const [expiration_date, expiration_dateOnChange] = useInput('');
   const [bought_on, bought_onOnChange] = useInput('');
   const [status, statusOnChange] = useInput('');
 
-  const AddItem = () => {
+    function UpdateItem () {
     const body = {
-      name,
+      item_name: itemInfo.item_name,
       expiration_date,
       bought_on,
       status,
     };
 
-    if (name === '' ) throw Error ('Item name is required');
-    if (body.status === '') body.status = 'Full';
-
-    fetch('/fridge/create', {
-      method: 'POST',
+    fetch('/fridge/update', {
+      method: 'PATCH',
       headers: {
         'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify(body),
     })
-      .then((resp) => resp.json())
+      .then(()=> closeModal())
       .catch((err) =>
-        console.log('CreateVegetable fetch /create: ERROR: ', err)
+        console.log('UpdateItem fetch /create: ERROR: ', err)
       );
   };
-
-  return (
-    <section className='mainSection'>
-      <header className='pageHeader'>
-        <h2>Add an Inventory Item</h2>
-        <Link to={'/'}>
-          <button type='button' className='btnSecondary'>
-            Go Back
-          </button>
-        </Link>
-      </header>
-      <article className='card createItem'>
-        <h3>Enter your Item information</h3>
-        <div className='inventoryFields'>
-          <label htmlFor='name'>Name: </label>
-          <input name='name' value={name} onChange={nameOnChange} placeholder = {'Peanut Butter'}/>
-        </div>
-        <div className='inventoryFields'>
+  
+  return (<div> 
+    <div className='inventoryFields'>
           <label htmlFor='expiration_date'>Expiration Date : </label>
           <input 
             name='expiration_date' 
@@ -87,17 +67,15 @@ const CreateItem = (props) => {
           <button
             type='button'
             className='btnMain'
-            onClick={() => {
-              AddItem();
-              return window.location.replace('http://localhost:8080');
+            onClick={() => {UpdateItem();
+              return window.location.reload(false);
             }}
           >
             Save
-          </button>
-        </div>
-      </article>
-    </section>
-  );
-};
+          </button> 
+          </div>
+          </div>
+          )
+          }
 
-export default CreateItem;
+    export default UpdateModal;
