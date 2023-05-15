@@ -10,17 +10,24 @@ const useInput = (init) => {
 };
 
 function UpdateModal ({itemInfo, closeModal}) {
-  const [expiration_date, expiration_dateOnChange] = useInput('');
-  const [bought_on, bought_onOnChange] = useInput('');
+  const [expiration, expiration_dateOnChange] = useInput('');
+  const [date_bought, bought_onOnChange] = useInput('');
   const [status, statusOnChange] = useInput('');
 
     function UpdateItem () {
     const body = {
-      item_name: itemInfo.item_name,
-      expiration_date,
-      bought_on,
+      id : itemInfo._id,
+      expiration,
+      date_bought,
       status,
     };
+    console.log('body:', body);
+
+    if (expiration==='') body.expiration = itemInfo.expiration 
+
+    if (date_bought === '') body.date_bought = itemInfo.date_bought
+
+    if (status === '') body.status = itemInfo.status
 
     fetch('/fridge/update', {
       method: 'PATCH',
@@ -40,7 +47,7 @@ function UpdateModal ({itemInfo, closeModal}) {
           <label htmlFor='expiration_date'>Expiration Date : </label>
           <input 
             name='expiration_date' 
-            value={expiration_date} 
+            value={expiration} 
             onChange={expiration_dateOnChange} 
             placeholder={"YYYY-MM-DD"}
           />
@@ -49,7 +56,7 @@ function UpdateModal ({itemInfo, closeModal}) {
           <label htmlFor='bought_on'>Bought On: </label> 
           <input
             name='bought_on'
-            value={bought_on}
+            value={date_bought}
             onChange={bought_onOnChange}
             placeholder = {'YYYY-MM-DD'}
           />

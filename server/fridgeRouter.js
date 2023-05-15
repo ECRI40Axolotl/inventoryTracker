@@ -13,7 +13,7 @@ router.get('/', fridgeController.getItems, (req, res) =>
 
 router.post('/create', fridgeController.verifyItem, fridgeController.addItem, (req, res) => res.sendStatus(201));
 
-router.patch('/', fridgeController.updateItem, (req, res) =>
+router.patch('/update', fridgeController.updateItem, (req, res) =>
   res.sendStatus(200)
 );
 
