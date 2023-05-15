@@ -5,13 +5,15 @@ function InventoryItem({ item }) {
 
   const deleteItem = async (idNum) => {
     try {
-      console.log('idNum: ', idNum);
       const deletedItem = await fetch('/fridge/deleteItem', {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'Application/JSON',
+        },
         body: JSON.stringify({ id: idNum }),
       });
       console.log(deletedItem);
-      // return window.location.reload(false);
+      return window.location.reload(false);
     } catch (err) {
       console.log('Fridge.useEffect: get items: ERROR:, ', err);
     }
