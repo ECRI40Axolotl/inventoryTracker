@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-
-const fridgeRouter = require('./fridgeRouter.js');
+const authenticateToken = require('./controllers/authenticateToken');
+const fridgeRouter = require('./routes/fridgeRouter');
+const userRouter = required('./routes/auth');
 
 const PORT = 3000;
 
@@ -11,7 +12,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //request to router
-app.use('/fridge', fridgeRouter);
+app.use('/user', userRouter);
+app.use('/fridge', authenticateToken, fridgeRouter);
 
 //catch-all route handler for any requests
 
