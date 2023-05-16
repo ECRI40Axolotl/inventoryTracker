@@ -8,7 +8,7 @@ function InventoryItem({ item }) {
 
   const deleteItem = async (idNum) => {
     try {
-      const deletedItem = await fetch('/fridge/deleteItem', {
+      const deletedItem = await fetch('http://localhost:3000/fridge/deleteItem', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'Application/JSON',

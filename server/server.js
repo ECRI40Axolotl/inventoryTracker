@@ -1,12 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-
+const cors = require('cors');
 const fridgeRouter = require('./fridgeRouter.js');
 
 const PORT = 3000;
 
 // we need something to parse request body
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

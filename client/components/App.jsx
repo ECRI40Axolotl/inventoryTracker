@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
-// import { Route } from 'react-router-dom';
-//import './stylesheets/styles.css';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Fridge from './Fridge.jsx';
 import CreateItem from './CreateItem.jsx';
 
@@ -10,7 +7,7 @@ function App() {
   const fridgeState = true;
   return (
     <div id="outerFridgeBox">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route
             className="fridge"
@@ -20,7 +17,7 @@ function App() {
           ></Route>
           <Route exact path="/create" element={<CreateItem />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

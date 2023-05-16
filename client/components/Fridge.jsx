@@ -7,7 +7,7 @@ function Fridge(fridgeState) {
   async function fetchData() {
     try {
       //console.log('before ', inventory);
-      const response = await fetch('/fridge/');
+      const response = await fetch('http://localhost:3000/fridge/');
       //console.log('response object ', response);
       // console.log('response ', response.json());
       if (response.ok) {
