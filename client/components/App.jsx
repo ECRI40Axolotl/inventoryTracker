@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter } from 'react-router-dom';
 import Fridge from './Fridge.jsx';
 import CreateItem from './CreateItem.jsx';
 
@@ -7,7 +7,7 @@ function App() {
   const fridgeState = true;
   return (
     <div id="outerFridgeBox">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route
             className="fridge"
@@ -17,7 +17,7 @@ function App() {
           ></Route>
           <Route exact path="/create" element={<CreateItem />}></Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

@@ -29,7 +29,7 @@ const CreateItem = (props) => {
     if (name === '') throw Error('Item name is required');
     if (body.status === '') body.status = 'Full';
 
-    fetch('/fridge/create', {
+    fetch('http://localhost:3000/fridge/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',

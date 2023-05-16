@@ -29,7 +29,7 @@ function UpdateModal ({itemInfo, closeModal}) {
 
     if (status === '') body.status = itemInfo.status
 
-    fetch('/fridge/update', {
+    fetch('http://localhost:3000/fridge/update', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'Application/JSON',
