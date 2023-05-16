@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
-// import { Route } from 'react-router-dom';
-//import './stylesheets/styles.css';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Fridge from './Fridge.jsx';
 import CreateItem from './CreateItem.jsx';
 
