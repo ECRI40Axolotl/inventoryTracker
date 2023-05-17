@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Register = ({switchForm}) => {
+const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -60,7 +62,7 @@ const Register = ({switchForm}) => {
         <input required className='auth-input' onChange={handlePasswordChange} id='password' name='password' type='password' placeholder='********' />
         <button className='submit-btn' type="submit">Submit</button>
       </form>
-      <button className='link-btn' onClick={() => switchForm('login')}>Already have an account? Log in here.</button>
+      <button className='link-btn' onClick={() => navigate('/login')}>Already have an account? Log in here.</button>
     </div>
   );
 

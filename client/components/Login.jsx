@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const Login = ({switchForm}) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -30,7 +32,7 @@ const Login = ({switchForm}) => {
       .then((res) => {
         if(res.status === 200){
           alert('Log in successful!');
-          <Navigate to="/fridge" />; // or user main page
+          navigate('/main');
         } else {
           alert('Log in unsuccessful. Please check your login information');
         }
@@ -38,8 +40,8 @@ const Login = ({switchForm}) => {
       .catch((err) =>
         console.log('Log in: ERROR: ', err)
       );
-
   };
+
 
   return (
     <div className='form-container'>
@@ -51,7 +53,7 @@ const Login = ({switchForm}) => {
         <input required className='auth-input' onChange={handlePasswordChange} id='password' name='password' type='password' placeholder='********' />
         <button className='login-btn'type="submit">Log In</button>
       </form>
-      <button className='link-btn' onClick={() => switchForm('register')}>Do not have an account? Register here.</button>
+      <button className='link-btn' onClick={() => navigate('/register')}>Do not have an account? Register here.</button>
     </div>
   );
 
