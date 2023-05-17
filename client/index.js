@@ -7,7 +7,12 @@ import './stylesheets/App.scss';
 
 // render(<App />, document.getElementById('root'));
 // createRoot(document.getElementById('app')).render(<App />);
+
 const domNode = document.getElementById('app');
 const root = createRoot(domNode);
 
-root.render(<App />);
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);

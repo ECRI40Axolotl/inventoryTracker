@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import { Routes, Route, HashRouter } from 'react-router-dom';
+import { Routes, Route, HashRouter, BrowserRouter } from 'react-router-dom';
 import Fridge from './Fridge.jsx';
 import CreateItem from './CreateItem.jsx';
+import WelcomePage from '../pages/WelcomePage.jsx';
 
 function App() {
   const fridgeState = true;
   return (
-    <div id="outerFridgeBox">
-      <HashRouter>
-        <Routes>
-          <Route
-            className="fridge"
-            exact
-            path="/"
-            element={<Fridge fridgeState={fridgeState} />}
-          ></Route>
-          <Route exact path="/create" element={<CreateItem />}></Route>
-        </Routes>
-      </HashRouter>
-    </div>
+    // <div id="outerFridgeBox">
+    <Routes>
+      <Route path="/" element={<WelcomePage />} />
+      <Route
+        className="fridge"
+      
+        path="/fridge"
+        element={<Fridge fridgeState={fridgeState} />}
+      />
+      <Route  path="/create" element={<CreateItem />} />
+    </Routes>
+    // </div>
   );
 }
 
