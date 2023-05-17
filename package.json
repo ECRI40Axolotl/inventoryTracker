@@ -12,8 +12,8 @@
   "author": "Axolotl",
   "license": "ISC",
   "jest": {
-    "globalSetup": "./jest-setup.js",
-    "globalTeardown": "./jest-teardown.js",
+    "globalSetup": "./jest/jest-setup.js",
+    "globalTeardown": "./jest/jest-teardown.js",
     "testEnvironment": "jest-environment-jsdom",
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom/extend-expect"

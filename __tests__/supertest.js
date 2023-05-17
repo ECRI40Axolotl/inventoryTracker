@@ -5,28 +5,29 @@ const path = require('path');
 const server = 'http://localhost:3000';
 
 describe('Route integration', () => {
+
   describe('/', () => {
     describe('GET', () => {
       // Note that we return the evaluation of `request` here! It evaluates to
       // a promise, so Jest knows not to say this test passes until that
       // promise resolves. See https://jestjs.io/docs/en/asynchronous
-      it('responds with 200 status and text/html content type', () => {
+      it('responds with 404 status and text/html content type', () => {
         return request(server)
           .get('/')
           .expect('Content-Type', /text\/html/)
-          .expect(200);
+          .expect(404);
       });
     });
   });
 
-  // describe('/markets', () => {
-  //   describe('GET', () => {
-  //     it('responds with 200 status and application/json content type', () => {
-  //       return request(server)
-  //         .get('/markets')
-  //         .expect('Content-Type', /application\/json/)
-  //         .expect(200);
-  //     });
+  describe('/fridge', () => {
+    describe('GET', () => {
+      it('responds with 200 status and application/json content type', () => {
+        return request(server)
+          .get('/fridge')
+          .expect('Content-Type', /application\/json/)
+          .expect(200);
+      });
 
   //     // For this test, you'll need to inspect the body of the response and
   //     // ensure it contains the markets list. Check the markets.dev.json file
@@ -36,7 +37,7 @@ describe('Route integration', () => {
   //       expect(Array.isArray(response.body)).toEqual(true);
   //       expect(response.body).toEqual(JSON.parse(fs.readFileSync(path.join(__dirname, '../server/db/markets.test.json'))));
   //     });
-  //   });
+    });
 
   //   describe('PUT', () => {
   //     it('responds with 200 status and application/json content type', () => {
@@ -65,6 +66,6 @@ describe('Route integration', () => {
 
   //       expect(response.body).toHaveProperty('error');
   //     });
-    // });
   // });
+  });
 });
