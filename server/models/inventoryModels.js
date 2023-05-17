@@ -1,8 +1,9 @@
 const { Pool } = require('pg');
+require('dotenv').config();
 
 // our database uri
 const PG_URI =
-  'postgres://vdlrvdre:plMFiciKJ0rqevYjBSmlqca65GnpM050@drona.db.elephantsql.com/vdlrvdre';
+  'postgres://amwicuqx:xF_uHFwGwoxPakNz2H9_RdDwMNjE2fzt@drona.db.elephantsql.com/amwicuqx';
 
 // create a new pool here using the connection string above
 const pool = new Pool({
