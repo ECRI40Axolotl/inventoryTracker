@@ -12,15 +12,19 @@
   "author": "Axolotl",
   "license": "ISC",
   "jest": {
-    "globalSetup": "./jest/jest-setup.js",
-    "globalTeardown": "./jest/jest-teardown.js",
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js",
     "testEnvironment": "jest-environment-jsdom",
     "setupFilesAfterEnv": [
       "@testing-library/jest-dom/extend-expect"
     ]
   },
   "dependencies": {
+    "@babel/runtime": "^7.21.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "css": "^3.0.0",
     "css-loader": "^6.7.3",
     "express": "^4.18.2",
@@ -33,14 +37,18 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.11.1",
     "react-router-dom": "^6.11.1",
+    "regenerator-runtime": "^0.13.11",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
     "webpack": "^5.82.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
+    "@babel/plugin-transform-async-to-generator": "^7.20.7",
+    "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "concurrently": "^8.0.1",

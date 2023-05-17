@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const cors = require('cors');
-const fridgeRouter = require('./fridgeRouter.js');
+const fridgeRouter = require('./fridgeRouter');
 
 const PORT = 3000;
 
@@ -32,8 +32,8 @@ app.use((err, req, res, next) => {
 
 // start server
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}...`);
 });
 
-module.exports = app;
+module.exports = server;
