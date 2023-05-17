@@ -7,7 +7,7 @@ function Fridge(fridgeState) {
   async function fetchData() {
     try {
       //console.log('before ', inventory);
-      const response = await fetch('http://localhost:3000/fridge/');
+      const response = await fetch('/fridge/');
       //console.log('response object ', response);
       // console.log('response ', response.json());
       if (response.ok) {
@@ -35,22 +35,20 @@ function Fridge(fridgeState) {
   }
 
   return (
-    // ERD put this in from APP
-    <div id="outerFridgeBox"> 
 
-      <div id="innerFridgeBox">
-        <div id="sean">
-          <img src="https://i.imgur.com/QQO7r1k.png"  alt="Scott's Face lol"/>
-        </div>
-        {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
-        <div id="fridgeHandle"></div>
-        <Link to={'/create'}>
-          <button className="fridgeButton" type="button">
-            Add Item
-          </button>
-        </Link>
-        {inventoryElements}
+    <div id='innerFridgeBox'>
+      <div id='sean'>
+        <img src='https://i.imgur.com/QQO7r1k.png' />
       </div>
+      {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
+      <div id='fridgeHandle'></div>
+      <Link to={'/create'}>
+        <button className='fridgeButton' type='button'>
+          Add Item
+        </button>
+      </Link>
+      {inventoryElements}
+
     </div>
   );
 }

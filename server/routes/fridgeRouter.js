@@ -1,5 +1,5 @@
 const express = require('express');
-const fridgeController = require('./controllers/fridgeController.js');
+const fridgeController = require('../controllers/fridgeController.js');
 
 //declare controller here once it's named
 
