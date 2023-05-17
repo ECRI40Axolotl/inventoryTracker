@@ -3,11 +3,13 @@ const path = require('path');
 const app = express();
 const authenticateToken = require('./controllers/authenticateToken');
 const fridgeRouter = require('./routes/fridgeRouter');
-const userRouter = required('./routes/auth');
+const userRouter = require('./routes/auth');
+const cors = require('cors');
 
 const PORT = 3000;
 
 // we need something to parse request body
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

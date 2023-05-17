@@ -35,14 +35,14 @@ function Fridge(fridgeState) {
   }
 
   return (
-    <div id="innerFridgeBox">
-      <div id="sean">
-        <img src="https://i.imgur.com/QQO7r1k.png" />
+    <div id='innerFridgeBox'>
+      <div id='sean'>
+        <img src='https://i.imgur.com/QQO7r1k.png' />
       </div>
       {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
-      <div id="fridgeHandle"></div>
+      <div id='fridgeHandle'></div>
       <Link to={'/create'}>
-        <button className="fridgeButton" type="button">
+        <button className='fridgeButton' type='button'>
           Add Item
         </button>
       </Link>
