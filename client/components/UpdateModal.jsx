@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 
 const useInput = (init) => {
@@ -14,7 +15,9 @@ function UpdateModal({ itemInfo, closeModal }) {
   const [date_bought, bought_onOnChange] = useInput('');
   const [status, statusOnChange] = useInput('');
 
+
   function UpdateItem() {
+
     const body = {
       id: itemInfo._id,
       expiration,
@@ -22,6 +25,7 @@ function UpdateModal({ itemInfo, closeModal }) {
       status,
     };
     console.log('body:', body);
+
 
     if (expiration === '') body.expiration = itemInfo.expiration;
 
@@ -36,6 +40,7 @@ function UpdateModal({ itemInfo, closeModal }) {
       },
       body: JSON.stringify(body),
     })
+
       .then(() => closeModal())
       .catch((err) => console.log('UpdateItem fetch /create: ERROR: ', err));
   }
