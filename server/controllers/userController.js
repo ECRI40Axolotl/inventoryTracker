@@ -60,6 +60,9 @@ userController.loginUser = async (req, res, next) => {
       { expiresIn: '1h' }
     );
 
+    // Set the JWT token as an HTTP-only cookie
+    res.cookie('jwtToken', token, { httpOnly: true });
+
     // Save the token and the username to res.locals for further middleware to use
     res.locals.user = {
       token,

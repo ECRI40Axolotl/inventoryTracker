@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { Component, useState, useEffect } from 'react';
 
 import UpdateModal from './UpdateModal.jsx';

@@ -1,13 +1,13 @@
 const jwt = require('jsonwebtoken'); // Import JSON Web Token library
 
 function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization']; // Get 'Authorization' header from request
-
-  // If 'Authorization' header exists, split it on space character and take the second part (the token itself)
-  const token = authHeader && authHeader.split(' ')[1];
+  //since now im using cookies dont need authorization in the header
+  const token = req.cookies.jwtToken;
 
   // If no token is provided, send 400  status and end the function
-  if (token == null) return res.sendStatus(400);
+  if (!token) {
+    return res.status(400).json({ message: 'No token provided' });
+  }
 
   // Verify the provided token with the secret key
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {

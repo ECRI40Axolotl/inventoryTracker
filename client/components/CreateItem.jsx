@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -11,7 +11,7 @@ const useInput = (init) => {
 };
 
 const CreateItem = (props) => {
-  const [name, nameOnChange] = useInput('');
+  let [name, nameOnChange] = useInput('');
   const [expiration_date, expiration_dateOnChange] = useInput('');
   const [bought_on, bought_onOnChange] = useInput('');
   const [status, statusOnChange] = useInput('');

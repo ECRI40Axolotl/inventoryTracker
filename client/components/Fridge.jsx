@@ -35,6 +35,7 @@ function Fridge(fridgeState) {
   }
 
   return (
+
     <div id='innerFridgeBox'>
       <div id='sean'>
         <img src='https://i.imgur.com/QQO7r1k.png' />
@@ -47,6 +48,7 @@ function Fridge(fridgeState) {
         </button>
       </Link>
       {inventoryElements}
+
     </div>
   );
 }

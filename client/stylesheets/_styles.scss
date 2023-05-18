@@ -1,4 +1,4 @@
-/* MAIN COLORS: 
+/* MAIN COLORS:
 Navy: #052939
 Dark teal:#017e7f
 Light teal:#46b59b
@@ -301,3 +301,62 @@ button {
 .inventoryFields {
   max-height: 40rem;
 }
+
+// signup & login page
+
+.landing-page {
+  display: flex;
+  min-height: 100vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.form-container, .login-form, .signup-form {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.login-form, .signup-form {
+  margin-bottom: 0;
+  padding-bottom: 2rem;
+}
+
+.form-container h2 {
+  text-align: center;
+  padding: 0.8rem;
+}
+
+.submit-btn, .login-btn {
+  border: none;
+  background-color: #fcedd8;
+  color: black;
+  margin-top: 0.8rem;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.link-btn {
+  background-color: inherit;
+  color: #fcedd8;
+  text-decoration: underline;
+}
+
+.auth-label {
+  text-align: left;
+  padding: 0.25rem 0;
+}
+
+.auth-input {
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border: name;
+  border-radius: 10px;
+}
+
+
