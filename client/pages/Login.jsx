@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
+import LogoHeader from '../components/LogoHeader';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
+  const [errorMessage, setError] = useState([]);
 
   const navigate = useNavigate();
 
@@ -18,7 +22,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch('http://localhost:3000/user/login', {
+    fetch('/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',
@@ -28,10 +32,11 @@ const Login = () => {
         password
       })
     })
-      .then((res) => res.json())
+      // .then((res) => res.json())
       .then((res) => {
+        console.log('res.status: ', res);
         if(res.status === 200){
-          alert('Log in successful!');
+          // alert('Log in successful!');
           navigate('/main');
         } else {
           alert('Log in unsuccessful. Please check your login information');
@@ -53,6 +58,7 @@ const Login = () => {
         <input required className='auth-input' onChange={handlePasswordChange} id='password' name='password' type='password' placeholder='********' />
         <button className='login-btn'type="submit">Log In</button>
       </form>
+      {errorMessage}
       <button className='link-btn' onClick={() => navigate('/register')}>Do not have an account? Register here.</button>
     </div>
   );
@@ -60,3 +66,11 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+// "dev": "NODE_ENV=development concurrently \"webpack serve --open\" \"nodemon ./server/server.js\" --history-api-fallback",
+
+//"dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --open --hot --progress --color \" \"NODE_ENV=development nodemon ./server/server.js\"",
+
+// "start": "webpack-dev-server --inline --content-base . --history-api-fallback"

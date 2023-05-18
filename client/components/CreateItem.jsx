@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const useInput = (init) => {
@@ -11,22 +11,26 @@ const useInput = (init) => {
 };
 
 const CreateItem = (props) => {
-  let [name, nameOnChange] = useInput('');
-  const [expiration_date, expiration_dateOnChange] = useInput('');
-  const [bought_on, bought_onOnChange] = useInput('');
+  const dateInputRef = useRef(null);
+
+  let [item_name, nameOnChange] = useInput('');
+  const [expiration, expiration_dateOnChange] = useInput('');
+  const [date_bought, bought_onOnChange] = useInput('');
   const [status, statusOnChange] = useInput('');
 
   const AddItem = () => {
-    name = name.toLowerCase();
+    item_name = item_name.toLowerCase();
+    const user_id = '1';
 
     const body = {
-      name,
-      expiration_date,
-      bought_on,
+      item_name,
+      expiration,
+      date_bought,
       status,
+      user_id
     };
 
-    if (name === '') throw Error('Item name is required');
+    if (item_name === '') throw Error('Item name is required');
     if (body.status === '') body.status = 'Full';
 
     fetch('/fridge/create', {
@@ -46,41 +50,50 @@ const CreateItem = (props) => {
     <section className='mainSection'>
       <header className='pageHeader'>
         <h2>Add an Inventory Item</h2>
-        <Link to={'/'}>
+        <Link to={'/main'}>
           <button type='button' className='btnSecondary'>
             Go Back
           </button>
         </Link>
       </header>
+
       <article className='card createItem'>
         <h3>Enter your Item information</h3>
         <div className='inventoryFields'>
-          <label htmlFor='name'>Name: </label>
+
+          <label htmlFor='item_name'>Name: </label>
           <input
-            name='name'
-            value={name}
+            name='item_name'
+            value={item_name}
             onChange={nameOnChange}
             placeholder={'Peanut Butter'}
           />
         </div>
+
         <div className='inventoryFields'>
-          <label htmlFor='expiration_date'>Expiration Date : </label>
+          <label htmlFor='date_bought'>Bought On: </label>
           <input
-            name='expiration_date'
-            value={expiration_date}
-            onChange={expiration_dateOnChange}
-            placeholder={'YYYY-MM-DD'}
-          />
-        </div>
-        <div className='inventoryFields'>
-          <label htmlFor='bought_on'>Bought On: </label>
-          <input
-            name='bought_on'
-            value={bought_on}
+            type="date"
+            name='date_bought'
+            value={date_bought}
             onChange={bought_onOnChange}
             placeholder={'YYYY-MM-DD'}
+            ref={dateInputRef}
           />
         </div>
+
+        <div className='inventoryFields'>
+          <label htmlFor='expiration'>Expiration Date : </label>
+          <input
+            type="date"
+            name='expiration'
+            value={expiration}
+            onChange={expiration_dateOnChange}
+            placeholder={'YYYY-MM-DD'}
+            ref={dateInputRef}
+          />
+        </div>
+
         <div className='inventoryFields'>
           <label htmlFor='status'>Status : </label>
           <input
@@ -90,13 +103,14 @@ const CreateItem = (props) => {
             placeholder={'Full'}
           />
         </div>
+
         <div className='createButtonContainer'>
           <button
             type='button'
             className='btnMain'
             onClick={() => {
               AddItem();
-              return window.location.replace('http://localhost:8080');
+              return window.location.replace('http://localhost:8080/main');
             }}>
             Save
           </button>
