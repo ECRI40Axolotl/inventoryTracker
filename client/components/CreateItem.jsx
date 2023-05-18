@@ -16,24 +16,24 @@ const CreateItem = (props) => {
   let [item_name, nameOnChange] = useInput('');
   const [expiration, expiration_dateOnChange] = useInput('');
   const [date_bought, bought_onOnChange] = useInput('');
-  const [status, statusOnChange] = useInput('');
+  const [quantity, quantityOnChange] = useInput('');
 
   const AddItem = () => {
     item_name = item_name.toLowerCase();
-    const user_id = '1';
+    //const user_id = '1';
 
     const body = {
       item_name,
       expiration,
       date_bought,
-      status,
-      user_id
+      quantity,
+      //user_id,
     };
 
     if (item_name === '') throw Error('Item name is required');
-    if (body.status === '') body.status = 'Full';
+    if (body.quantity === '') body.quantity = 'Full';
 
-    fetch('/fridge/create', {
+    fetch('/fridge', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',
@@ -60,9 +60,9 @@ const CreateItem = (props) => {
       <article className='card createItem'>
         <h3>Enter your Item information</h3>
         <div className='inventoryFields'>
-
           <label htmlFor='item_name'>Name: </label>
           <input
+            required
             name='item_name'
             value={item_name}
             onChange={nameOnChange}
@@ -73,7 +73,7 @@ const CreateItem = (props) => {
         <div className='inventoryFields'>
           <label htmlFor='date_bought'>Bought On: </label>
           <input
-            type="date"
+            type='date'
             name='date_bought'
             value={date_bought}
             onChange={bought_onOnChange}
@@ -85,7 +85,8 @@ const CreateItem = (props) => {
         <div className='inventoryFields'>
           <label htmlFor='expiration'>Expiration Date : </label>
           <input
-            type="date"
+            required
+            type='date'
             name='expiration'
             value={expiration}
             onChange={expiration_dateOnChange}
@@ -95,11 +96,11 @@ const CreateItem = (props) => {
         </div>
 
         <div className='inventoryFields'>
-          <label htmlFor='status'>Status : </label>
+          <label htmlFor='quantity'>Quantity : </label>
           <input
-            name='status'
-            value={status}
-            onChange={statusOnChange}
+            name='quantity'
+            value={quantity}
+            onChange={quantityOnChange}
             placeholder={'Full'}
           />
         </div>
