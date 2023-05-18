@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import UpdateModal from './UpdateModal.jsx';
 
-function InventoryItem({ item }) {
+function InventoryItem({ item, daysLeft }) {
   const [inStock, setStock] = useState(false);
   const [modalState, setModalState] = useState(false);
+
+  const {_id, item_name,expiration, date_bought, status} = item;
 
   const deleteItem = async (idNum) => {
     try {
@@ -32,7 +34,7 @@ function InventoryItem({ item }) {
   }
 
   useEffect(() => {
-    if (item._id) {
+    if (_id) {
       setStock(true);
     }
   });
@@ -41,21 +43,21 @@ function InventoryItem({ item }) {
     <div id='inventoryList'>
       <section className='inventoryItem'>
         <div className='itemInfo'>
-          <h2>{item.item_name}</h2>
+          <h2>{item_name}</h2>
           {/* Will show information if it exists in inventory */}
           {inStock && (
             <div>
               <ul className='inventoryTableInfo'>
                 <li className='itemDetail'>
                   <span className='detailTitle'>Expiration Date:</span>{' '}
-                  {item.expiration}
+                  {expiration}
                 </li>
                 <li className='itemDetail'>
                   <span className='detailTitle'>Bought On:</span>{' '}
-                  {item.date_bought}
+                  {date_bought}
                 </li>
                 <li className='itemDetail'>
-                  <span className='detailTitle'>Status:</span> {item.status}
+                  <span className='detailTitle'>Status:</span> {status}
                 </li>
               </ul>
               {modalState && (
@@ -71,7 +73,7 @@ function InventoryItem({ item }) {
                   className='deleteInventory'
                   onClick={() => {
                     //console.log('in click: ', item._id);
-                    deleteItem(item._id);
+                    deleteItem(_id);
                   }}>
                   Delete Item
                 </button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const useInput = (init) => {
@@ -10,23 +10,22 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
-const CreateItem = (props) => {
-  let [name, nameOnChange] = useInput('');
-  const [expiration_date, expiration_dateOnChange] = useInput('');
+const CreateItem = () => {
+  let [item_name, item_nameOnChange] = useInput('');
+  const [expiration, expirationOnChange] = useInput('');
   const [bought_on, bought_onOnChange] = useInput('');
   const [status, statusOnChange] = useInput('');
 
   const AddItem = () => {
-    name = name.toLowerCase();
+    item_name = item_name.toLowerCase();
 
     const body = {
-      name,
-      expiration_date,
+      item_name,
+      expiration,
       bought_on,
       status,
     };
 
-    if (name === '') throw Error('Item name is required');
     if (body.status === '') body.status = 'Full';
 
     fetch('/fridge/create', {
@@ -57,24 +56,27 @@ const CreateItem = (props) => {
         <div className='inventoryFields'>
           <label htmlFor='name'>Name: </label>
           <input
+            required
             name='name'
-            value={name}
-            onChange={nameOnChange}
+            value={item_name}
+            onChange={item_nameOnChange}
             placeholder={'Peanut Butter'}
           />
         </div>
         <div className='inventoryFields'>
           <label htmlFor='expiration_date'>Expiration Date : </label>
           <input
+            required
             name='expiration_date'
-            value={expiration_date}
-            onChange={expiration_dateOnChange}
+            value={expiration}
+            onChange={expirationOnChange}
             placeholder={'YYYY-MM-DD'}
           />
         </div>
         <div className='inventoryFields'>
           <label htmlFor='bought_on'>Bought On: </label>
           <input
+            required
             name='bought_on'
             value={bought_on}
             onChange={bought_onOnChange}

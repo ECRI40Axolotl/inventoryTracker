@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import InventoryItem from './InventoryItem.jsx';
+import { v4 as uuidv4 } from 'uuid';
 
 function Fridge(fridgeState) {
   const [inventory, setInventory] = useState([]);
@@ -27,18 +28,42 @@ function Fridge(fridgeState) {
     console.log('Im in useEffect');
     fetchData();
   }, []);
-  const inventoryElements = [];
 
-  for (let i = 0; i < inventory.length; i++) {
-    //console.log('inventory loop is:', inventory[i]);
-    inventoryElements.push(<InventoryItem key={i} item={inventory[i]} />);
-  }
+  // create helper func to convert date to comparable num
+  // e.g. '11/31/1969' => 19691131
+  const convertDateFormat = (dateStr) => {
+    if (!dateStr) return undefined;
+    const dateArr = dateStr.split('/');
+    const [month, day, year] = dateArr;
+    return [year, month, day].join('');
+  };
+
+  // calculate days from expiration
+  const exporationCalculator = (expirationDateStr) => {
+    if (!expirationDateStr) return undefined;
+    const today = new Date();
+    const expirationDate = new Date(expirationDateStr);
+    return (today.getTime() - expirationDate.getTime()) / (1000 * 3600 * 24);
+  };
+
+  // const inventoryElements = [];
+
+  // for (const item of inventory) {
+  //   inventoryElements.push(<InventoryItem key={0} item={item} />);
+  //   inventoryElements.sort((a,b) => convertDateFormat(a.expiration) - convertDateFormat(b.expiration));
+  // }
+
+  const inventoryElements = inventory.map(item => {
+    <InventoryItem key={uuidv4()} item={item} daysLeft={exporationCalculator(item.expiration)} />;
+  });
+
+  inventoryElements.sort((a,b) => convertDateFormat(a.expiration) - convertDateFormat(b.expiration));
 
   return (
 
     <div id='innerFridgeBox'>
       <div id='sean'>
-        <img src='https://i.imgur.com/QQO7r1k.png' />
+        <img src='https://i.imgur.com/QQO7r1k.png' alt='Sean'/>
       </div>
       {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
       <div id='fridgeHandle'></div>
@@ -48,7 +73,6 @@ function Fridge(fridgeState) {
         </button>
       </Link>
       {inventoryElements}
-
     </div>
   );
 }
