@@ -1,5 +1,4 @@
 import React from 'react';
-import LogoHeader from '../components/LogoHeader';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
