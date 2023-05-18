@@ -24,7 +24,7 @@ describe('Route integration', () => {
       it('responds with 400 status and application/json content type', () => {
         return request(server)
           .get('/fridge')
-          .expect('Content-Type', /text\/plain/)
+          .expect('Content-Type', /application\/json/)
           .expect(400);
       });
 

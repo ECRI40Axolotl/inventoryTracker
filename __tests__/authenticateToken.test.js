@@ -10,30 +10,30 @@ describe('AuthenticateToken controller', () => {
 
   describe('invalid token', () => {
     const req = {
-      headers: { Authorization: 'Bearer 1234' },
+      cookies: { jwtToken:'1234' },
     };
 
-    it('should send a status 400', () => {
+    it('sends a status 400', () => {
       authenticate(req, res, next);
       expect(res.sendStatus.mock.calls[0][0]).toBe(400);
     });
 
-    it('should not call the next function', () => expect(next).toBeCalledTimes(0));
+    it('does not call the next function', () => expect(next).toBeCalledTimes(0));
   });
 
   describe('valid token', () => {
     const testUser = {userId: 'user1'}
     const token = jwt.sign(testUser, process.env.JWT_SECRET, {expiresIn:'1h'});
     const req = {
-      headers: { authorization: `Bearer ${token}` },
+      cookies: { jwtToken: token },
     };
 
-    it('should attach a decoded user to the request object', async () => {
+    it('attaches a decoded user to the request object', async () => {
       authenticate(req, res, next);
       expect(req.user.userId).toBe(testUser.userId);
     });
 
-    it('should call the next function upon completion', () => {
+    it('calls the next function upon completion', () => {
       authenticate(req, res, next);
       expect(next).toBeCalled();
     });
