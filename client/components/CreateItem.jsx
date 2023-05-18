@@ -16,7 +16,7 @@ const CreateItem = (props) => {
   let [item_name, nameOnChange] = useInput('');
   const [expiration, expiration_dateOnChange] = useInput('');
   const [date_bought, bought_onOnChange] = useInput('');
-  const [status, statusOnChange] = useInput('');
+  const [quantity, quantityOnChange] = useInput('');
 
   const AddItem = () => {
     item_name = item_name.toLowerCase();
@@ -26,12 +26,12 @@ const CreateItem = (props) => {
       item_name,
       expiration,
       date_bought,
-      status,
+      quantity,
       user_id
     };
 
     if (item_name === '') throw Error('Item name is required');
-    if (body.status === '') body.status = 'Full';
+    if (body.quantity === '') body.quantity = 'Full';
 
     fetch('/fridge/create', {
       method: 'POST',
@@ -97,11 +97,11 @@ const CreateItem = (props) => {
         </div>
 
         <div className='inventoryFields'>
-          <label htmlFor='status'>Status : </label>
+          <label htmlFor='quantity'>Quantity : </label>
           <input
-            name='status'
-            value={status}
-            onChange={statusOnChange}
+            name='quantity'
+            value={quantity}
+            onChange={quantityOnChange}
             placeholder={'Full'}
           />
         </div>
