@@ -59,8 +59,9 @@ fridgeController.getItems = async (req, res, next) => {
 // checks if item is in our item table or not, and adds it if not
 
 fridgeController.verifyItem = async (req, res, next) => {
-  // console.log("you're in the verifyItem method!")
+  console.log("YOU'RE IN THE VERIFYITEM METHOD");
   const { item_name } = req.body;
+  console.log('REQ.BODY: ', req.body);
   req.body.item_name = item_name;
   const itemExists = 'SELECT COUNT(1) FROM item_table WHERE item_name = $1';
   // adding passed in item name to item table
@@ -68,13 +69,13 @@ fridgeController.verifyItem = async (req, res, next) => {
   const itemName = [item_name];
   try {
     const itemObject = await db.query(itemExists, itemName);
-    // console.log('itemObject: ', itemObject);
+    console.log('itemObject: ', itemObject);
     const itemStatus = itemObject.rows[0].count;
     // console.log('ITEM STATUS TYPE: ', typeof itemStatus);
     if (itemStatus === '0') {
       // add it to the item table
       const newItem = await db.query(addItemToItemTable, itemName);
-      // console.log('newItem :', newItem);
+      console.log('newItem :', newItem);
     }
     return next();
   } catch (err) {
@@ -90,11 +91,12 @@ fridgeController.verifyItem = async (req, res, next) => {
 // add items
 
 fridgeController.addItem = async (req, res, next) => {
-  // console.log("you're in the add item method!");
-  const { item_name, expiration, date_bought, status } = req.body;
+  console.log("YOU'RE IN THE ADD ITEM METHOD");
+  const { item_name, expiration, date_bought, status, user_id } = req.body; // CHANGED-added user_id!!
+  console.log('REQ.BODY: ', req.body);
   const addItemToInventory =
-    'INSERT INTO inventory_table (item_id, expiration, date_bought, status) VALUES ((SELECT _id FROM item_table WHERE item_name = $1), $2, $3, $4)';
-  const values = [item_name, expiration, date_bought, status];
+    'INSERT INTO inventory_table (item_id, expiration, date_bought, status, user_id) VALUES ((SELECT _id FROM item_table WHERE item_name = $1), $2, $3, $4, $5)';
+  const values = [item_name, expiration, date_bought, status, user_id];
   // console.log('values array: ', values);
   try {
     const itemInv = await db.query(addItemToInventory, values);

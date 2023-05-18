@@ -7,8 +7,10 @@ const router = express.Router();
 
 //declare routes below
 
-router.get('/', fridgeController.getItems, (req, res) =>
-  res.status(200).json(res.locals.inventory)
+router.get('/get', fridgeController.getItems, (req, res) =>{
+  console.log('SERVER SIDE RESPONSE: ', res.locals.inventory);
+  return res.status(200).json(res.locals.inventory);
+}
 );
 
 router.post('/create', fridgeController.verifyItem, fridgeController.addItem, (req, res) => res.sendStatus(201));

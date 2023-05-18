@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -42,7 +42,7 @@ const Register = () => {
       .then((res) => {
         if(res.status === 200){
           alert('Registration successful!');
-          <Navigate to="/login" />;
+          navigate('/main');
         } else {
           alert('Registration unsuccessful. Please retry.');
         }
