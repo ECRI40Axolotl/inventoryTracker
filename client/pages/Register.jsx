@@ -38,11 +38,10 @@ const Register = () => {
         password
       })
     })
-      .then((res) => res.json())
       .then((res) => {
-        if(res.status === 200){
+        if(res.status === 201){
           alert('Registration successful!');
-          navigate('/main');
+          navigate('/login');
         } else {
           alert('Registration unsuccessful. Please retry.');
         }

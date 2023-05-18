@@ -63,6 +63,7 @@ const CreateItem = (props) => {
 
           <label htmlFor='item_name'>Name: </label>
           <input
+            required
             name='item_name'
             value={item_name}
             onChange={nameOnChange}
@@ -85,6 +86,7 @@ const CreateItem = (props) => {
         <div className='inventoryFields'>
           <label htmlFor='expiration'>Expiration Date : </label>
           <input
+            required
             type="date"
             name='expiration'
             value={expiration}
