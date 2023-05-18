@@ -6,7 +6,7 @@ import LogoHeader from '../components/LogoHeader';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+
   const [errorMessage, setError] = useState([]);
 
   const navigate = useNavigate();
@@ -32,7 +32,6 @@ const Login = () => {
         password
       })
     })
-      // .then((res) => res.json())
       .then((res) => {
         console.log('res.status: ', res);
         if(res.status === 200){

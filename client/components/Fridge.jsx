@@ -30,18 +30,18 @@ function Fridge(fridgeState) {
   }, []);
 
   // calculate days from expiration
-  const exporationCalculator = (expirationDateStr) => {
+  const expirationCalculator = (expirationDateStr) => {
     if (!expirationDateStr) return undefined;
     const today = new Date();
     const expirationDate = new Date(expirationDateStr);
     return Math.floor((expirationDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
   };
-git
+
   const inventoryList = [];
 
   for (const item of inventory){
     if (item._id){
-      inventoryList.push(<InventoryItem key={uuidv4()} item={item} daysLeft={exporationCalculator(item.expiration)}
+      inventoryList.push(<InventoryItem key={uuidv4()} item={item} daysLeft={expirationCalculator(item.expiration)}
       />);
     }
   }
