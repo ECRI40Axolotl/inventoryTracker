@@ -62,6 +62,7 @@ function Fridge(fridgeState) {
       <div id='sean'>
         <img src='https://i.imgur.com/QQO7r1k.png' alt="sean's face" />
       </div>
+
       {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
       <div id='fridgeHandle'></div>
       <Link to={'/create'}>

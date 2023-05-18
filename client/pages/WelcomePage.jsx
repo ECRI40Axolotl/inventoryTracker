@@ -6,13 +6,15 @@ function WelcomePage() {
   const navigate = useNavigate();
   return (
     <div className='welcomePage'>
-      <Link className='welcomeLogIn' to='/login'>
-        Log In
-      </Link>{' '}
-      &nbsp;
-      <Link className='welcomeSignUp' to='/register'>
-        Sign Up
-      </Link>
+      <div className='signup-login-container'>
+        <Link className='welcomeLogIn' to='/login'>
+          Log In
+        </Link>{' '}
+        &nbsp;
+        <Link className='welcomeSignUp' to='/register'>
+          Sign Up
+        </Link>
+      </div>
       <textbox
         onClick={() => navigate('/login')}
         className='fridge-icon-container'>
