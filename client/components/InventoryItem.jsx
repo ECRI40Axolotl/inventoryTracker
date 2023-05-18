@@ -4,7 +4,7 @@ import UpdateModal from './UpdateModal.jsx';
 function InventoryItem({item, daysLeft}) {
   const [inStock, setStock] = useState(false);
   const [modalState, setModalState] = useState(false);
-  const {_id, item_name, expiration, date_bought, status} = item;
+  const { _id, item_name, expiration, date_bought, status } = item;
 
   const deleteItem = async (idNum) => {
     try {
@@ -36,9 +36,32 @@ function InventoryItem({item, daysLeft}) {
     }
   });
 
+  const setColor = () => {
+    if (daysLeft < 0){
+      return '#41403f';
+    } else if (daysLeft < 6){
+      return '#f53110';
+    } else if (daysLeft > 5 && daysLeft < 10){
+      return '#fcba03';
+    } else {
+      return '#46b59b';
+    }
+  }
+
+  // send reminder once a day
+  const sendReminder = () => {
+    if (daysLeft < 1) alert (`${item_name} is expired! Remember to remove ${item_name} from your fridge!`);
+  }
+
+  setInterval(sendReminder(), 86400000);
+
   return (
     <div id="inventoryList">
-      <section className="inventoryItem">
+      <section className="inventoryItem"
+        style={{
+          backgroundColor: setColor()
+        }}
+      >
         <div className="itemInfo">
           <h2>{item_name}</h2>
           {/* Will show information if it exists in inventory */}
