@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import UpdateModal from './UpdateModal.jsx';
 
 function InventoryItem({item, daysLeft}) {
   const [inStock, setStock] = useState(false);
   const [modalState, setModalState] = useState(false);
-  const { _id, item_name, expiration, date_bought, status } = item;
+  const { _id, item_name, expiration, date_bought, quantity } = item;
 
   const deleteItem = async (idNum) => {
     try {
@@ -77,7 +78,7 @@ function InventoryItem({item, daysLeft}) {
                   {date_bought}
                 </li>
                 <li className="itemDetail">
-                  <span className="detailTitle">Status:</span> {status}
+                  <span className="detailTitle">Quantity:</span> {quantity}
                 </li>
                 <li className="itemDetail">
                   <span className="detailTitle">Days Left:</span> {daysLeft}

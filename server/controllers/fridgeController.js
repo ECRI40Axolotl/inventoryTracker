@@ -92,11 +92,11 @@ fridgeController.verifyItem = async (req, res, next) => {
 
 fridgeController.addItem = async (req, res, next) => {
   console.log("YOU'RE IN THE ADD ITEM METHOD");
-  const { item_name, expiration, date_bought, status, user_id } = req.body; // CHANGED-added user_id!!
+  const { item_name, expiration, date_bought, quantity, user_id } = req.body; // CHANGED-added user_id!!
   console.log('REQ.BODY: ', req.body);
   const addItemToInventory =
-    'INSERT INTO inventory_table (item_id, expiration, date_bought, status, user_id) VALUES ((SELECT _id FROM item_table WHERE item_name = $1), $2, $3, $4, $5)';
-  const values = [item_name, expiration, date_bought, status, user_id];
+    'INSERT INTO inventory_table (item_id, expiration, date_bought, quantity, user_id) VALUES ((SELECT _id FROM item_table WHERE item_name = $1), $2, $3, $4, $5)';
+  const values = [item_name, expiration, date_bought, quantity, user_id];
   // console.log('values array: ', values);
   try {
     const itemInv = await db.query(addItemToInventory, values);
@@ -118,10 +118,10 @@ fridgeController.updateItem = async (req, res, next) => {
   // string is the query
   // console.log('request body: ', req.body);
   // console.log("you're in the UPDATE items method!");
-  const { id, expiration, date_bought, status } = req.body;
+  const { id, expiration, date_bought, quantity } = req.body;
   const updateQuery =
-    'UPDATE inventory_table SET expiration = $2, date_bought = $3, status = $4 WHERE _id = $1';
-  const values = [id, expiration, date_bought, status];
+    'UPDATE inventory_table SET expiration = $2, date_bought = $3, quantity = $4 WHERE _id = $1';
+  const values = [id, expiration, date_bought, quantity];
   try {
     await db.query(updateQuery, values);
     return next();

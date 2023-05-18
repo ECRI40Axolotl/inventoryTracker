@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState} from 'react';
 
 const useInput = (init) => {
@@ -12,7 +13,7 @@ const useInput = (init) => {
 function UpdateModal ({item, closeModal}) {
   const [expiration, expiration_dateOnChange] = useInput('');
   const [date_bought, bought_onOnChange] = useInput('');
-  const [status, statusOnChange] = useInput('');
+  const [quantity, quantityOnChange] = useInput('');
 
 
   function UpdateItem () {
@@ -20,15 +21,15 @@ function UpdateModal ({item, closeModal}) {
       id : item._id,
       expiration,
       date_bought,
-      status,
+      quantity,
     };
     console.log('body:', body);
 
-    if (expiration === '') body.expiration = item.expiration
+    if (expiration === '') body.expiration = item.expiration;
 
-    if (date_bought === '') body.date_bought = item.date_bought
+    if (date_bought === '') body.date_bought = item.date_bought;
 
-    if (status === '') body.status = item.status
+    if (quantity === '') body.quantity = item.quantity;
 
     fetch('/fridge/update', {
       method: 'PATCH',
@@ -66,11 +67,11 @@ function UpdateModal ({item, closeModal}) {
         />
       </div>
       <div className='inventoryFields'>
-        <label htmlFor='status'>Status : </label>
+        <label htmlFor='quantity'>Quantity : </label>
         <input
-          name='status'
-          value={status}
-          onChange={statusOnChange}
+          name='quantity'
+          value={quantity}
+          onChange={quantityOnChange}
           placeholder={'Full'}
         />
       </div>
