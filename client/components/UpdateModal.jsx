@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -10,15 +10,14 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
-function UpdateModal ({item, closeModal}) {
+function UpdateModal({ item, closeModal }) {
   const [expiration, expiration_dateOnChange] = useInput('');
   const [date_bought, bought_onOnChange] = useInput('');
   const [quantity, quantityOnChange] = useInput('');
 
-
-  function UpdateItem () {
+  function UpdateItem() {
     const body = {
-      id : item._id,
+      id: item._id,
       expiration,
       date_bought,
       quantity,
@@ -31,17 +30,15 @@ function UpdateModal ({item, closeModal}) {
 
     if (quantity === '') body.quantity = item.quantity;
 
-    fetch('/fridge/update', {
+    fetch('/fridge', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'Application/JSON',
       },
       body: JSON.stringify(body),
     })
-      .then(()=> closeModal())
-      .catch((err) =>
-        console.log('UpdateItem fetch /create: ERROR: ', err)
-      );
+      .then(() => closeModal())
+      .catch((err) => console.log('UpdateItem fetch /create: ERROR: ', err));
   }
 
   return (
