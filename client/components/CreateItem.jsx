@@ -32,6 +32,7 @@ const CreateItem = (props) => {
 
     if (item_name === '') throw Error('Item name is required');
     if (body.quantity === '') body.quantity = 'Full';
+    if (body.quantity === '') body.quantity = 'Full';
 
     fetch('/fridge', {
       method: 'POST',

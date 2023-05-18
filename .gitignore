@@ -11,3 +11,6 @@ npm-debug.log*
 
 # output from webpack
 dist/
+
+#security
+.env

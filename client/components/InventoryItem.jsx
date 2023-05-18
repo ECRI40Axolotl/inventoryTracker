@@ -9,7 +9,7 @@ function InventoryItem({ item, daysLeft }) {
 
   const deleteItem = async (idNum) => {
     try {
-      const deletedItem = await fetch('/fridge', {
+      const deletedItem = await fetch('/fridge/deleteItem', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'Application/JSON',
@@ -51,7 +51,7 @@ function InventoryItem({ item, daysLeft }) {
 
   // send reminder once a day
   const sendReminder = () => {
-    if (daysLeft < 1)
+    if (daysLeft < 0)
       alert(
         `${item_name} is expired! Remember to remove ${item_name} from your fridge!`
       );
