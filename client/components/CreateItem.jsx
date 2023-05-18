@@ -20,20 +20,21 @@ const CreateItem = (props) => {
 
   const AddItem = () => {
     item_name = item_name.toLowerCase();
-    const user_id = '1';
+    //const user_id = '1';
 
     const body = {
       item_name,
       expiration,
       date_bought,
       quantity,
-      user_id
+      //user_id,
     };
 
     if (item_name === '') throw Error('Item name is required');
     if (body.quantity === '') body.quantity = 'Full';
+    if (body.quantity === '') body.quantity = 'Full';
 
-    fetch('/fridge/create', {
+    fetch('/fridge', {
       method: 'POST',
       headers: {
         'Content-Type': 'Application/JSON',
@@ -60,7 +61,6 @@ const CreateItem = (props) => {
       <article className='card createItem'>
         <h3>Enter your Item information</h3>
         <div className='inventoryFields'>
-
           <label htmlFor='item_name'>Name: </label>
           <input
             required
@@ -74,7 +74,7 @@ const CreateItem = (props) => {
         <div className='inventoryFields'>
           <label htmlFor='date_bought'>Bought On: </label>
           <input
-            type="date"
+            type='date'
             name='date_bought'
             value={date_bought}
             onChange={bought_onOnChange}
@@ -87,7 +87,7 @@ const CreateItem = (props) => {
           <label htmlFor='expiration'>Expiration Date : </label>
           <input
             required
-            type="date"
+            type='date'
             name='expiration'
             value={expiration}
             onChange={expiration_dateOnChange}

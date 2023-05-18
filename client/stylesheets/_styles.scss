@@ -25,6 +25,10 @@ header {
   margin-bottom: 2em;
 }
 
+.logoHeader {
+  margin-bottom: 3em;
+}
+
 #sean {
   position: absolute;
   transform: scale(0.4, 0.4);
@@ -240,12 +244,9 @@ button {
   max-width: 8rem;
 }
 
-/* **** These styles for for /create (to add item) **** */
+/* **** These styles for /create (to add item) **** */
 
 .mainSection {
-  position: absolute;
-  top: 4rem;
-  left: 35rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -273,6 +274,7 @@ button {
 .btnSecondary:hover {
   border: 0.15rem solid #efa032;
   background: #fff7ed;
+  color: #efa032;
 }
 
 .card {
