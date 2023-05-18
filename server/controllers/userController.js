@@ -22,7 +22,7 @@ userController.registerUser = async (req, res, next) => {
   } catch (err) {
     // If an error occurs, pass it to the error handling middleware
     return next({
-      log: 'Error in registerUser controller method',
+      log: `Error in registerUser controller method: ${err}`,
       status: 400,
       message: 'Error while registering new user',
     });
@@ -60,6 +60,9 @@ userController.loginUser = async (req, res, next) => {
       { expiresIn: '1h' }
     );
 
+    // Set the JWT token as an HTTP-only cookie
+    res.cookie('jwtToken', token, { httpOnly: true });
+
     // Save the token and the username to res.locals for further middleware to use
     res.locals.user = {
       token,
@@ -70,7 +73,7 @@ userController.loginUser = async (req, res, next) => {
   } catch (err) {
     // If an error occurs, pass it to the error handling middleware
     return next({
-      log: 'Error in loginUser controller method',
+      log: `Error in loginUser controller method ${err}`,
       status: 400,
       message: { err: err.message },
     });

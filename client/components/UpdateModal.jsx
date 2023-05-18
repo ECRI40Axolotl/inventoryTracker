@@ -43,47 +43,50 @@ function UpdateModal ({item, closeModal}) {
       );
   }
 
-  return (<div>
-    <div className='inventoryFields'>
-      <label htmlFor='expiration_date'>Expiration Date : </label>
-      <input
-        name='expiration_date'
-        value={expiration}
-        onChange={expiration_dateOnChange}
-        placeholder={'YYYY-MM-DD'}
-      />
+  return (
+    <div>
+      <div className='inventoryFields'>
+        <label htmlFor='expiration_date'>Expiration Date : </label>
+        <input
+          type='date'
+          name='expiration_date'
+          value={expiration}
+          onChange={expiration_dateOnChange}
+          placeholder={'YYYY-MM-DD'}
+        />
+      </div>
+      <div className='inventoryFields'>
+        <label htmlFor='bought_on'>Bought On: </label>
+        <input
+          type='date'
+          name='bought_on'
+          value={date_bought}
+          onChange={bought_onOnChange}
+          placeholder={'YYYY-MM-DD'}
+        />
+      </div>
+      <div className='inventoryFields'>
+        <label htmlFor='status'>Status : </label>
+        <input
+          name='status'
+          value={status}
+          onChange={statusOnChange}
+          placeholder={'Full'}
+        />
+      </div>
+      <div className='createButtonContainer'>
+        <button
+          type='button'
+          className='btnMain'
+          onClick={() => {
+            UpdateItem();
+            return window.location.reload(false);
+          }}>
+          Save
+        </button>
+      </div>
     </div>
-    <div className='inventoryFields'>
-      <label htmlFor='bought_on'>Bought On: </label>
-      <input
-        name='bought_on'
-        value={date_bought}
-        onChange={bought_onOnChange}
-        placeholder = {'YYYY-MM-DD'}
-      />
-    </div>
-    <div className='inventoryFields'>
-      <label htmlFor='status'>Status : </label>
-      <input
-        name='status'
-        value={status}
-        onChange={statusOnChange}
-        placeholder={'Full'}
-      />
-    </div>
-    <div className='createButtonContainer'>
-      <button
-        type='button'
-        className='btnMain'
-        onClick={() => {UpdateItem();
-          return window.location.reload(false);
-        }}
-      >
-        Save
-      </button>
-    </div>
-  </div>
-  )
+  );
 }
 
 export default UpdateModal;

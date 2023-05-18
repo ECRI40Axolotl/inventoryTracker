@@ -5,6 +5,7 @@ const authenticateToken = require('./controllers/authenticateToken');
 const fridgeRouter = require('./routes/fridgeRouter');
 const userRouter = require('./routes/auth');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const PORT = 3000;
 
@@ -12,10 +13,13 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 //request to router
 app.use('/user', userRouter);
-app.use('/fridge', authenticateToken, fridgeRouter);
+
+app.use('/fridge', fridgeRouter);
+// app.use('/fridge', authenticateToken, fridgeRouter);
 
 //catch-all route handler for any requests
 

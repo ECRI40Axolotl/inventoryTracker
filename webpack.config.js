@@ -22,6 +22,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.scss'],
   },
   devServer: {
+    host: 'localhost',
     historyApiFallback: true,
     static: {
       directory: path.resolve(__dirname, './dist'),
@@ -29,8 +30,11 @@ module.exports = {
     },
     compress: true,
     port: 8080,
+    hot: true,
     proxy: {
-      '*': 'http://localhost:3000',
+      '/user/**': 'http://localhost:3000/',
+      '/fridge/**': 'http://localhost:3000/',
+      // '*': 'http://localhost:3000',
     },
   },
   module: {

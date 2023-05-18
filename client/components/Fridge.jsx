@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import InventoryItem from './InventoryItem.jsx';
-import { v4 as uuidv4 } from 'uuid';
+import LogoHeader from './LogoHeader.jsx';
+
 
 function Fridge(fridgeState) {
   const [inventory, setInventory] = useState([]);
   async function fetchData() {
     try {
-      const response = await fetch('/fridge/');
+      //console.log('before ', inventory);
+      const response = await fetch('/fridge/get');
+      //console.log('response object ', response);
+      console.log('RESPONSE: ', response);
       if (response.ok) {
+        console.log('RESPONSE OK!!!!!');
+        // console.log('RESPONSE: ', await response.json());
         const data = await response.json();
+        console.log('data is:', data);
         setInventory(data);
       } else {
         throw new Error('Request failed with status ' + response.status);
@@ -43,18 +50,21 @@ function Fridge(fridgeState) {
   const sortedInventoryList = [...inventoryList].sort((a,b) => a.props.daysLeft - b.props.daysLeft);
 
   return (
-    <div id="innerFridgeBox">
-      <div id="sean">
-        <img src="https://i.imgur.com/QQO7r1k.png" />
+    <div id='innerFridgeBox'>
+      <div id='sean'>
+        <img src='https://i.imgur.com/QQO7r1k.png' alt="sean's face"/>
       </div>
       {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
-      <div id="fridgeHandle"></div>
+      <div id='fridgeHandle'></div>
+
       <Link to={'/create'}>
         <button className="fridgeButton" type="button">
           Add Item
         </button>
       </Link>
-      {sortedInventoryList}
+
+      {inventoryElements}
+
     </div>
   );
 }
