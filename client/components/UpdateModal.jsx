@@ -50,6 +50,7 @@ function UpdateModal({ itemInfo, closeModal }) {
       <div className='inventoryFields'>
         <label htmlFor='expiration_date'>Expiration Date : </label>
         <input
+          type='date'
           name='expiration_date'
           value={expiration}
           onChange={expiration_dateOnChange}
@@ -59,6 +60,7 @@ function UpdateModal({ itemInfo, closeModal }) {
       <div className='inventoryFields'>
         <label htmlFor='bought_on'>Bought On: </label>
         <input
+          type='date'
           name='bought_on'
           value={date_bought}
           onChange={bought_onOnChange}
