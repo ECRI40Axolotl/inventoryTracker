@@ -38,6 +38,7 @@
     "react-router-dom": "^6.11.1",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
+    "uuid": "^9.0.0",
     "webpack": "^5.82.0"
   },
   "devDependencies": {
