@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import InventoryItem from './InventoryItem.jsx';
-import LogoHeader from './LogoHeader.jsx';
-
+import { v4 as uuidv4 } from 'uuid';
 
 function Fridge(fridgeState) {
   const [inventory, setInventory] = useState([]);
@@ -37,7 +36,7 @@ function Fridge(fridgeState) {
     const expirationDate = new Date(expirationDateStr);
     return Math.floor((expirationDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
   };
-
+git
   const inventoryList = [];
 
   for (const item of inventory){
@@ -55,16 +54,13 @@ function Fridge(fridgeState) {
         <img src='https://i.imgur.com/QQO7r1k.png' alt="sean's face"/>
       </div>
       {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
-      <div id='fridgeHandle'></div>
-
+      <div id="fridgeHandle"></div>
       <Link to={'/create'}>
         <button className="fridgeButton" type="button">
           Add Item
         </button>
       </Link>
-
-      {inventoryElements}
-
+      {sortedInventoryList}
     </div>
   );
 }
