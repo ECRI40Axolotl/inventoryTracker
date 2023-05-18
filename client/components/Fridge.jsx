@@ -23,15 +23,6 @@ function Fridge(fridgeState) {
     fetchData();
   }, []);
 
-  // create helper func to convert date to comparable num
-  // e.g. '11/31/1969' => 19691131
-  const convertDateFormat = (dateStr) => {
-    if (!dateStr) return undefined;
-    const dateArr = dateStr.split('/');
-    const [month, day, year] = dateArr;
-    return [year, month, day].join('');
-  };
-
   // calculate days from expiration
   const exporationCalculator = (expirationDateStr) => {
     if (!expirationDateStr) return undefined;
@@ -40,18 +31,21 @@ function Fridge(fridgeState) {
     return Math.floor((expirationDate.getTime() - today.getTime()) / (1000 * 3600 * 24));
   };
 
-  const inventoryElements = [];
+  const inventoryList = [];
 
   for (const item of inventory){
-    inventoryElements.push(<InventoryItem key={uuidv4()} item={item} daysLeft={exporationCalculator(item.expiration)}/>);
+    if (item._id){
+      inventoryList.push(<InventoryItem key={uuidv4()} item={item} daysLeft={exporationCalculator(item.expiration)}
+      />);
+    }
   }
 
-  inventoryElements.slice().sort((a,b) => convertDateFormat(a.props.expiration) - convertDateFormat(b.props.expiration));
+  const sortedInventoryList = [...inventoryList].sort((a,b) => a.props.daysLeft - b.props.daysLeft);
 
   return (
     <div id="innerFridgeBox">
       <div id="sean">
-        <img src="https://i.imgur.com/QQO7r1k.png" alt="Seam"/>
+        <img src="https://i.imgur.com/QQO7r1k.png" />
       </div>
       {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
       <div id="fridgeHandle"></div>
@@ -60,7 +54,7 @@ function Fridge(fridgeState) {
           Add Item
         </button>
       </Link>
-      {inventoryElements}
+      {sortedInventoryList}
     </div>
   );
 }
