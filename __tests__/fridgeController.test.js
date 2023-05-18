@@ -7,9 +7,8 @@ describe('FridgeController', () => {
     expiration: '12/30/2022',
     item_name: 'PIZZA',
     quantity: 1,
-    user_id: 'TEST_USER',
   };
-  const req = { body: item };
+  const req = { body: item, user:{userId:'TEST_USER'} };
   const res = { locals: {} };
   const next = jest.fn();
   
@@ -29,17 +28,17 @@ describe('FridgeController', () => {
   
   describe('getItems', () => {
     it('stores the return of db.query in res.locals', async () => {
-      await fridge.getItems({}, res, next);
+      await fridge.getItems(req, res, next);
       expect(res.locals.inventory).toStrictEqual([item]);
     });
 
     it('calls db.query', async () => {
-      await fridge.getItems({}, res, next);
+      await fridge.getItems(req, res, next);
       expect(mockQuery).toBeCalled();
     });
 
     it('calls the next function', async () => {
-      await fridge.getItems({}, res, next);
+      await fridge.getItems(req, res, next);
       expect(next).toBeCalled();
     });
   });
@@ -109,7 +108,7 @@ describe('FridgeController', () => {
         item.expiration,
         item.date_bought,
         item.quantity,
-        item.user_id,
+        req.user.userId
       ]);
     });
 
@@ -138,6 +137,7 @@ describe('FridgeController', () => {
         item.expiration,
         item.date_bought,
         item.quantity,
+        req.user.userId
       ]);
     });
 
@@ -162,8 +162,8 @@ describe('FridgeController', () => {
     it('calls query with array of item parameters from req.body as second argument', async () => {
       await fridge.deleteItem(req, res, next);
       expect(mockQuery).toHaveBeenNthCalledWith(1, expect.anything(), [
-        item.id,
-      ]);
+        item.id,req.user.userId
+      ], );
     });
 
     it('returns an invocation of the next function', async () => {
