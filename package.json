@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development concurrently \"webpack serve --open\" \"nodemon ./server/server.js\"",
-    "test": "jest --verbose"
+    "test": "NODE_ENV=test jest --verbose"
   },
   "author": "Axolotl",
   "license": "ISC",
