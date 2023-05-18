@@ -3,7 +3,8 @@
   "env": {
     "node": true,
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "plugins": ["import", "react", "jsx-a11y", "css-modules"],
   "extends": [

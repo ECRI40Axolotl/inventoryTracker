@@ -7,7 +7,7 @@
     "start": "NODE_ENV=production node server/server.js",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development concurrently \"webpack-dev-server --open --history-api-fallback\" \"nodemon ./server/server.js\" ",
-    "test": "jest --verbose"
+    "test": "NODE_ENV=test jest --verbose"
   },
   "author": "Axolotl",
   "license": "ISC",
@@ -20,9 +20,13 @@
     ]
   },
   "dependencies": {
+    "@babel/runtime": "^7.21.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "css": "^3.0.0",
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
@@ -37,6 +41,7 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.11.1",
     "react-router-dom": "^6.11.1",
+    "regenerator-runtime": "^0.13.11",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
     "uuid": "^9.0.0",
@@ -44,8 +49,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.21.8",
+    "@babel/plugin-transform-async-to-generator": "^7.20.7",
+    "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.5",
     "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "concurrently": "^8.0.1",

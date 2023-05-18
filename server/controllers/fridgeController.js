@@ -52,13 +52,11 @@ fridgeController.verifyItem = async (req, res, next) => {
   const itemName = [item_name];
   try {
     const itemObject = await db.query(itemExists, itemName);
-    console.log('itemObject: ', itemObject);
     const itemStatus = itemObject.rows[0].count;
     // console.log('ITEM STATUS TYPE: ', typeof itemStatus);
     if (itemStatus === '0') {
       // add it to the item table
       const newItem = await db.query(addItemToItemTable, itemName);
-      console.log('newItem :', newItem);
     }
     return next();
   } catch (err) {
