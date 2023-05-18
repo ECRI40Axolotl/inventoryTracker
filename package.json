@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=production node server/server.js",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development concurrently \"webpack serve --open\" \"nodemon ./server/server.js\"",
+    "dev": "NODE_ENV=development concurrently \"webpack-dev-server --open --history-api-fallback\" \"nodemon ./server/server.js\" ",
     "test": "NODE_ENV=test jest --verbose"
   },
   "author": "Axolotl",
@@ -44,6 +44,7 @@
     "regenerator-runtime": "^0.13.11",
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
+    "uuid": "^9.0.0",
     "webpack": "^5.82.0"
   },
   "devDependencies": {

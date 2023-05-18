@@ -17,7 +17,9 @@ app.use(cookieParser());
 
 //request to router
 app.use('/user', userRouter);
-app.use('/fridge', authenticateToken, fridgeRouter);
+
+app.use('/fridge', fridgeRouter);
+// app.use('/fridge', authenticateToken, fridgeRouter);
 
 //catch-all route handler for any requests
 

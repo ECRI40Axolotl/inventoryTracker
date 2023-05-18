@@ -80,7 +80,7 @@ em {
 
 #innerFridgeBox {
   background: #fff7ed;
-  position: absolute;
+  /* position: absolute; */
   max-width: 85%;
   border-radius: 1rem;
   padding: 5.8rem 10rem 5rem 5rem;
@@ -151,7 +151,7 @@ button {
   box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
   color: #026767;
   background: #46b59b;
-  padding: 2rem 1rem;
+  padding: 2.5rem 1rem;
   margin: 1rem;
   border-radius: 0.8rem;
   min-width: 12rem;
@@ -165,7 +165,7 @@ button {
 .itemInfo {
   background: #fff7ed;
   border-radius: 0.8rem;
-  padding: 0.5rem;
+  padding: 0.8rem;
   margin: 0.3rem;
   box-shadow: 0.2rem 0.25rem 0.1rem #31806e;
   display: flex;
