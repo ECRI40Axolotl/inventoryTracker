@@ -25,6 +25,10 @@ header {
   margin-bottom: 2em;
 }
 
+.logoHeader {
+  margin-bottom: 3em;
+}
+
 #sean {
   position: absolute;
   transform: scale(0.4, 0.4);
@@ -151,7 +155,7 @@ button {
   box-shadow: 0.2rem 0.25rem 0.1rem #d1cac1;
   color: #026767;
   background: #46b59b;
-  padding: 2.5rem 1rem;
+  padding: 2rem 1rem;
   margin: 1rem;
   border-radius: 0.8rem;
   min-width: 12rem;
@@ -165,7 +169,7 @@ button {
 .itemInfo {
   background: #fff7ed;
   border-radius: 0.8rem;
-  padding: 0.8rem;
+  padding: 0.5rem;
   margin: 0.3rem;
   box-shadow: 0.2rem 0.25rem 0.1rem #31806e;
   display: flex;
@@ -240,12 +244,9 @@ button {
   max-width: 8rem;
 }
 
-/* **** These styles for for /create (to add item) **** */
+/* **** These styles for /create (to add item) **** */
 
 .mainSection {
-  position: absolute;
-  top: 4rem;
-  left: 35rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -273,6 +274,7 @@ button {
 .btnSecondary:hover {
   border: 0.15rem solid #efa032;
   background: #fff7ed;
+  color: #efa032;
 }
 
 .card {

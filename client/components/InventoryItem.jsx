@@ -51,7 +51,7 @@ function InventoryItem({item, daysLeft}) {
 
   // send reminder once a day
   const sendReminder = () => {
-    if (daysLeft < 1) alert (`${item_name} is expired! Remember to remove ${item_name} from your fridge!`);
+    if (daysLeft < 0) alert (`${item_name} is expired! Remember to remove ${item_name} from your fridge!`);
   };
 
   setInterval(sendReminder(), 86400000);
