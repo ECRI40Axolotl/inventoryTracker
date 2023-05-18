@@ -7,20 +7,21 @@ describe('FridgeController', () => {
 
   describe('getItems', () => {
     it('stores a list of items in res.locals', async () => {
+      const item = {
+        date_bought: '12-1-2022',
+        expiration: '12-30-2022',
+        item_name: 'pizza',
+      };
+
       const mock = jest.spyOn(db, 'query');
       mock.mockImplementation(() =>
         Promise.resolve({
-          rows: [
-            {
-              date_bought: '12-1-2022',
-              expiration: '12-30-2022',
-              item_name: 'pizza',
-            },
-          ],
+          rows: [item],
         })
       );
-      const response = await fridge.getItems({}, res, next);
+      await fridge.getItems({}, res, next);
       console.log(res.locals.inventory);
+      expect(res.locals).toBe(item);
     });
   });
 });
