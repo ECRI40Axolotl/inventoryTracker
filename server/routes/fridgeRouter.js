@@ -1,5 +1,5 @@
 const express = require('express');
-const fridgeController = require('./controllers/fridgeController.js');
+const fridgeController = require('../controllers/fridgeController.js');
 
 //declare controller here once it's named
 
@@ -11,7 +11,12 @@ router.get('/', fridgeController.getItems, (req, res) =>
   res.status(200).json(res.locals.inventory)
 );
 
-router.post('/create', fridgeController.verifyItem, fridgeController.addItem, (req, res) => res.sendStatus(201));
+router.post(
+  '/create',
+  fridgeController.verifyItem,
+  fridgeController.addItem,
+  (req, res) => res.sendStatus(201)
+);
 
 router.patch('/update', fridgeController.updateItem, (req, res) =>
   res.sendStatus(200)

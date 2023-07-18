@@ -11,22 +11,24 @@ const useInput = (init) => {
 };
 
 const CreateItem = (props) => {
-  const [name, nameOnChange] = useInput('');
+  const dateInputRef = useRef(null);
+
+  const [item_name, nameOnChange] = useInput('');
   const [expiration_date, expiration_dateOnChange] = useInput('');
   const [bought_on, bought_onOnChange] = useInput('');
-  const [status, statusOnChange] = useInput('');
+  const [quantity, quantityOnChange] = useInput('');
 
   const AddItem = () => {
-    name = name.toLowerCase();
+    item_name = item_name.toLowerCase();
 
     const body = {
-      name,
+      item_name,
       expiration_date,
       bought_on,
-      status,
+      quantity,
     };
 
-    if (name === '') throw Error('Item name is required');
+    if (item_name === '') throw Error('Item name is required');
     if (body.status === '') body.status = 'Full';
 
     fetch('/fridge/create', {
@@ -37,66 +39,64 @@ const CreateItem = (props) => {
       body: JSON.stringify(body),
     })
       .then((resp) => resp.json())
-      .catch((err) =>
-        console.log('CreateVegetable fetch /create: ERROR: ', err)
-      );
+      .catch((err) => console.log('CreateItem fetch /create: ERROR: ', err));
   };
 
   return (
-    <section className="mainSection">
-      <header className="pageHeader">
+    <section className='mainSection'>
+      <header className='pageHeader'>
         <h2>Add an Inventory Item</h2>
-        <Link to={'/'}>
-          <button type="button" className="btnSecondary">
+        <Link to={'/main'}>
+          <button type='button' className='btnSecondary'>
             Go Back
           </button>
         </Link>
       </header>
-      <article className="card createItem">
+      <article className='card createItem'>
         <h3>Enter your Item information</h3>
-        <div className="inventoryFields">
-          <label htmlFor="name">Name: </label>
+        <div className='inventoryFields'>
+          <label htmlFor='name'>Name: </label>
           <input
-            name="name"
-            value={name}
+            name='name'
+            value={item_name}
             onChange={nameOnChange}
             placeholder={'Peanut Butter'}
           />
         </div>
-        <div className="inventoryFields">
-          <label htmlFor="expiration_date">Expiration Date : </label>
+        <div className='inventoryFields'>
+          <label htmlFor='expiration_date'>Expiration Date : </label>
           <input
-            name="expiration_date"
+            name='expiration_date'
             value={expiration_date}
             onChange={expiration_dateOnChange}
             placeholder={'YYYY-MM-DD'}
           />
         </div>
-        <div className="inventoryFields">
-          <label htmlFor="bought_on">Bought On: </label>
+        <div className='inventoryFields'>
+          <label htmlFor='bought_on'>Bought On: </label>
           <input
-            name="bought_on"
+            name='bought_on'
             value={bought_on}
             onChange={bought_onOnChange}
             placeholder={'YYYY-MM-DD'}
           />
         </div>
-        <div className="inventoryFields">
-          <label htmlFor="status">Status : </label>
+        <div className='inventoryFields'>
+          <label htmlFor='status'>Status : </label>
           <input
-            name="status"
-            value={status}
-            onChange={statusOnChange}
+            name='status'
+            value={quantity}
+            onChange={quantityOnChange}
             placeholder={'Full'}
           />
         </div>
-        <div className="createButtonContainer">
+        <div className='createButtonContainer'>
           <button
-            type="button"
-            className="btnMain"
+            type='button'
+            className='btnMain'
             onClick={() => {
               AddItem();
-              return window.location.replace('http://localhost:8080');
+              return window.location.replace('http://localhost:8080/main');
             }}
           >
             Save

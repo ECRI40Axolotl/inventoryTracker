@@ -1,0 +1,54 @@
+@import "styles.scss";
+
+.welcomePage {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2em;
+  /* border: 1px solid red; */
+}
+
+.signup-login-container {
+  display: flex;
+  justify-content: center;
+  gap: 4em;
+}
+
+.welcomeLogIn,
+.welcomeSignUp {
+  color: #fff7ed; 
+  font-size: 28px;
+  letter-spacing: 0.04rem;
+  font-weight: 800;
+  text-decoration: none;
+ /* border: 0.15rem solid rgb(244, 150, 77); */
+  border-radius: 0.3em;
+  border: 0.01em solid #017e7f ;
+  padding: 0.5rem 0.8rem;
+  background: linear-gradient(to bottom,  #d1cac1 , #efa032);
+  box-shadow: 0.2rem 0.25rem 0.1rem black;
+}
+
+.welcomeLogIn:hover,
+.welcomeSignUp:hover {
+  background: #fff7ed;
+  color: #efa032;
+  border-radius: 0.3em;
+  border: 0.01em solid #efa032;
+  box-shadow: 0.2rem 0.25rem 0.1rem black;
+}
+
+#fridge-icon {
+  display: flex;
+  width: 75%;
+  height: auto;
+  margin-top: 3.5em;
+}
+
+.fridge-icon-container {
+  display: flex;
+  justify-content: center;
+}
+
+.fridge-icon-container:hover {
+  cursor: pointer;
+}

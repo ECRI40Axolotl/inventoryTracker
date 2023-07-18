@@ -1,17 +1,24 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
-const fridgeRouter = require('./fridgeRouter.js');
+const authenticateToken = require('./controllers/authenticateToken');
+const fridgeRouter = require('./routes/fridgeRouter');
+const userRouter = require('./routes/auth');
 
 const PORT = 3000;
 
 // we need something to parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(cookieParser());
 
 //request to router
-app.use('/fridge', fridgeRouter);
+app.use('/fridge', authenticateToken, fridgeRouter);
+app.use('/user', userRouter);
 
 //catch-all route handler for any requests
 

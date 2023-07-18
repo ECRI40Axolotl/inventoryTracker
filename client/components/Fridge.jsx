@@ -4,18 +4,14 @@ import InventoryItem from './InventoryItem.jsx';
 
 function Fridge(fridgeState) {
   const [inventory, setInventory] = useState([]);
+
   async function fetchData() {
     try {
-      //console.log('before ', inventory);
-      const response = await fetch('/fridge/');
-      //console.log('response object ', response);
-      // console.log('response ', response.json());
+      const response = await fetch('/fridge');
       if (response.ok) {
-        //console.log('parsing data block');
         const data = await response.json();
-        //console.log('data is:', data);
+
         setInventory(data);
-        //console.log('new inventory ', inventory);
       } else {
         throw new Error('Request failed with status ' + response.status);
       }
@@ -23,30 +19,52 @@ function Fridge(fridgeState) {
       console.log('Fridge.useEffect: get items: ERROR:, ', err);
     }
   }
+
   useEffect(() => {
-    console.log('Im in useEffect');
     fetchData();
   }, []);
-  const inventoryElements = [];
 
-  for (let i = 0; i < inventory.length; i++) {
-    //console.log('inventory loop is:', inventory[i]);
-    inventoryElements.push(<InventoryItem key={i} item={inventory[i]} />);
+  // calculate days from expiration
+  const expirationCalculator = (expirationDateStr) => {
+    if (!expirationDateStr) return undefined;
+    const today = new Date();
+    const expirationDate = new Date(expirationDateStr);
+    return Math.floor(
+      (expirationDate.getTime() - today.getTime()) / (1000 * 3600 * 24)
+    );
+  };
+
+  const inventoryList = [];
+
+for (const item of inventory) {
+  if (item._id) {
+    inventoryList.push(
+      <InventoryItem
+        key={uuidv4()}
+        item={item}
+        daysLeft={expirationCalculator(item.expiration)}
+      />
+    );
   }
+}
+
+const sortedInventoryList = [...inventoryList].sort(
+  (a, b) => a.props.daysLeft - b.props.daysLeft
+);
 
   return (
-    <div id="innerFridgeBox">
-      <div id="sean">
-        <img src="https://i.imgur.com/QQO7r1k.png" />
+    <div id='innerFridgeBox'>
+      <div id='sean'>
+        <img src='https://i.imgur.com/QQO7r1k.png' />
       </div>
       {/* The 'fridgeHandle' div below is strictly for styling this to look like a fridge :) */}
-      <div id="fridgeHandle"></div>
+      <div id='fridgeHandle'></div>
       <Link to={'/create'}>
-        <button className="fridgeButton" type="button">
+        <button className='fridgeButton' type='button'>
           Add Item
         </button>
       </Link>
-      {inventoryElements}
+      {sortedInventoryList}
     </div>
   );
 }
