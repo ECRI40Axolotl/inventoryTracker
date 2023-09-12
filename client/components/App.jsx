@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Routes, Route, HashRouter, BrowserRouter } from 'react-router-dom';
-import './stylesheets/styles.scss';
+import '../stylesheets/styles.scss';
 
 import Fridge from './Fridge.jsx';
 import CreateItem from './CreateItem.jsx';
-import WelcomePage from '../pages/WelcomePage.jsx';
+import WelcomePage from '../pages/Landing.jsx';
 import Login from '../pages/Login.jsx';
 import Register from '../pages/Register.jsx';
 import LogoHeader from '../components/LogoHeader';

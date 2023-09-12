@@ -4,12 +4,12 @@ const userController = require('../controllers/userController.js');
 const authRouter = express.Router();
 
 // Route for user registration
-router.post('/register', userController.registerUser, (req, res) => {
+authRouter.post('/register', userController.registerUser, (req, res) => {
   res.status(201).json(res.locals.user);
 });
 
 // Route for user login
-router.post('/login', userController.loginUser, (req, res) => {
+authRouter.post('/login', userController.loginUser, (req, res) => {
   res.status(200).json(res.locals.user);
 });
 

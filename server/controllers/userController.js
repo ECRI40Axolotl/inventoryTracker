@@ -10,9 +10,59 @@ userController.registerUser = async (req, res, next) => {
     // Hash the password using bcrypt. The '10' is the saltRounds, or the cost factor for the hashing function
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
+    const createTableQuery = `
+    CREATE TABLE IF NOT EXISTS users (
+    id serial PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+    );
+    `;
+
+  // Execute the CREATE TABLE query to create the table if it doesn't exist
+  await db.query(createTableQuery);
+
+    // SQL query to add the "users" column if it doesn't exist
+  //   const addUserColIfNone = `
+  //   DO $$ 
+  //   BEGIN
+  //     IF NOT EXISTS (
+  //       SELECT 1 
+  //       FROM information_schema.columns 
+  //       WHERE table_name = 'users' 
+  //       AND column_name = 'user'
+  //     ) THEN
+  //       ALTER TABLE "users" ADD COLUMN "user" VARCHAR(255);
+  //     END IF;
+  //   END $$;
+  // `;
+  
+  //   const addPassColIfNone = `
+  //     DO $$ 
+  //     BEGIN
+  //       IF NOT EXISTS (
+  //         SELECT 1 
+  //         FROM information_schema.columns 
+  //         WHERE table_name = 'users' 
+  //         AND column_name = 'password'
+  //       ) THEN
+  //         ALTER TABLE "users" ADD COLUMN "password" VARCHAR(255);
+  //       END IF;
+  //     END $$;
+  //   `;
+  
+  
+  //   // Execute the ALTER TABLE query to add the column if it doesn't exist
+  //   console.log('before running make user column query')
+  //   await db.query(addUserColIfNone);
+  //   console.log('after running make user column query')
+  //   console.log('before running make password column query')
+  //   await db.query(addPassColIfNone);
+  //   console.log('after running make password column query')
+
+
     // Insert the new user into the database. RETURNING * will return the data of the inserted row
     const text =
-      'INSERT INTO users(username, password) VALUES($1, $2) RETURNING *';
+      'INSERT INTO users(username, password) VALUES($1, $2) RETURNING *'
     const values = [req.body.username, hashedPassword];
     const newUser = await db.query(text, values);
 

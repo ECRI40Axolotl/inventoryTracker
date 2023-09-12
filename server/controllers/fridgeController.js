@@ -24,6 +24,17 @@ const fixDateFormat = (dateString) => {
 
 // get all items
 fridgeController.getItems = async (req, res, next) => {
+  // if the table doesn't exist, make one
+
+  //! figure out what you need to put into item_table, and also make a db to store items and put it in .env
+  const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS item_table (
+  id serial PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+  );
+  `;
+  await db.query(createTableQuery)
   // string is the query
   const itemQuery =
     'SELECT * FROM item_table FULL OUTER JOIN inventory_table ON item_table._id = inventory_table.item_id';
